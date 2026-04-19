@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bjfv8081u8dra"]
+
+[ext_resource type="PackedScene" uid="uid://ji4kjoqm3nuh" path="res://Player/player.tscn" id="1_smgpj"]
+[ext_resource type="Texture2D" uid="uid://boms2eclpteaq" path="res://Player/pruebadef.png" id="2_48l2u"]
+
+[node name="Player" unique_id=2144492399 instance=ExtResource("1_smgpj")]
+
+[node name="Sprite2D" parent="." index="1" unique_id=1052233174]
+texture = ExtResource("2_48l2u")

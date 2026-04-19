@@ -1,0 +1,271 @@
+[gd_scene format=4 uid="uid://bnpo242tfas6l"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_gocoa"]
+[ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="2_j4y68"]
+[ext_resource type="PackedScene" uid="uid://bt8nycc2ev1qs" path="res://GeneralNodes/area_trigger/area_trigger.tscn" id="3_6r6fj"]
+[ext_resource type="PackedScene" uid="uid://cq32mohonpsw3" path="res://Tile Maps/grass-tiles-01.tscn" id="3_hh5ne"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="4_8cg85"]
+[ext_resource type="PackedScene" uid="uid://bi8crg3nv50qw" path="res://npc/npc.tscn" id="5_g6g4m"]
+[ext_resource type="Resource" uid="uid://csvi3x1wp3gy6" path="res://npc/00_npcs/npc_01.tres" id="6_86h4m"]
+[ext_resource type="PackedScene" uid="uid://dapdr3ojo2pha" path="res://npc/npc_behavior_wander.tscn" id="7_jnq63"]
+[ext_resource type="PackedScene" uid="uid://b22o8rtjyby8c" path="res://Interactables/dialog/dialog_interaction.tscn" id="8_x30po"]
+[ext_resource type="Script" uid="uid://7qrcj0xrfdwc" path="res://Interactables/dialog/scripts/dialog_text.gd" id="9_bchre"]
+[ext_resource type="Script" uid="uid://ib6a845pd247" path="res://Interactables/dialog/scripts/cutscene_action_music.gd" id="10_4jsar"]
+[ext_resource type="Script" uid="uid://bn3hxd4o1fctj" path="res://Interactables/dialog/scripts/cutscene_action_player.gd" id="10_bchre"]
+[ext_resource type="Script" uid="uid://cgv82amncyx68" path="res://Interactables/dialog/scripts/cutscene_action_camera.gd" id="11_6ays4"]
+[ext_resource type="AudioStream" uid="uid://bss1hbkoufxql" path="res://Levels/music/example_music_03.ogg" id="11_6r6fj"]
+[ext_resource type="Script" uid="uid://0mcihlaufovq" path="res://Interactables/dialog/scripts/dialog_cutscene.gd" id="11_86h4m"]
+[ext_resource type="Resource" uid="uid://cdc3sykvmnn27" path="res://npc/00_npcs/00_hero.tres" id="12_hvxrb"]
+[ext_resource type="Script" uid="uid://cof5epf5dwei1" path="res://Interactables/dialog/scripts/cutscene_action_move.gd" id="12_x30po"]
+[ext_resource type="PackedScene" uid="uid://cf0a8hxch6kfd" path="res://Props/pot/pot.tscn" id="14_bchre"]
+[ext_resource type="PackedScene" uid="uid://bjfv8081u8dra" path="res://Player/michael.tscn" id="16_233nq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvxrb"]
+size = Vector2(276, 224)
+
+[sub_resource type="Animation" id="Animation_bchre"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_x30po"]
+resource_name = "fade_to_black"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.5]
+}
+
+[sub_resource type="Animation" id="Animation_jnq63"]
+resource_name = "fade_to_normal"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DirectionalLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4jsar"]
+_data = {
+&"RESET": SubResource("Animation_bchre"),
+&"fade_to_black": SubResource("Animation_x30po"),
+&"fade_to_normal": SubResource("Animation_jnq63")
+}
+
+[node name="04_cutscene_test" type="Node2D" unique_id=519109853]
+y_sort_enabled = true
+script = ExtResource("1_gocoa")
+music = ExtResource("2_j4y68")
+
+[node name="AreaTrigger" parent="." unique_id=1218363381 instance=ExtResource("3_6r6fj")]
+
+[node name="DialogInteraction" parent="AreaTrigger" unique_id=1963746723 instance=ExtResource("8_x30po")]
+position = Vector2(321, 154)
+enabled = false
+
+[node name="DialogCutscene_MOVE" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=147930846]
+script = ExtResource("11_86h4m")
+npc_info = ExtResource("6_86h4m")
+metadata/_custom_type_script = "uid://0mcihlaufovq"
+
+[node name="CutsceneActionMusic" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE" unique_id=1868793602]
+script = ExtResource("10_4jsar")
+track = ExtResource("11_6r6fj")
+metadata/_custom_type_script = "uid://ib6a845pd247"
+
+[node name="CutsceneActionMove" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE" unique_id=1594282997 node_paths=PackedStringArray("object_to_move")]
+position = Vector2(355, 66)
+script = ExtResource("12_x30po")
+timing_method = 1
+object_to_move = NodePath("../../../../NPC")
+move_speed = 80.0
+metadata/_custom_type_script = "uid://cof5epf5dwei1"
+
+[node name="CutsceneActionMove2" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE" unique_id=2012593108 node_paths=PackedStringArray("object_to_move")]
+position = Vector2(417, 66)
+script = ExtResource("12_x30po")
+timing_method = 1
+object_to_move = NodePath("../../../../NPC")
+move_speed = 80.0
+metadata/_custom_type_script = "uid://cof5epf5dwei1"
+
+[node name="CutsceneActionMove3" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE" unique_id=592287418 node_paths=PackedStringArray("object_to_move")]
+position = Vector2(425, 102)
+script = ExtResource("12_x30po")
+timing_method = 1
+object_to_move = NodePath("../../../../NPC")
+move_speed = 80.0
+metadata/_custom_type_script = "uid://cof5epf5dwei1"
+
+[node name="DialogText" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=1514201078]
+script = ExtResource("9_bchre")
+text = "You, young hero. Come over here,
+and let me peer into your eyes..."
+npc_info = ExtResource("6_86h4m")
+
+[node name="DialogCutscene_MOVE2" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=1368181620]
+script = ExtResource("11_86h4m")
+playback_mode = 0
+npc_info = ExtResource("6_86h4m")
+metadata/_custom_type_script = "uid://0mcihlaufovq"
+
+[node name="CutsceneActionPlayer" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE2" unique_id=585526105]
+position = Vector2(425, 125)
+script = ExtResource("10_bchre")
+timing_method = 1
+metadata/_custom_type_script = "uid://bn3hxd4o1fctj"
+
+[node name="CutsceneActionCamera" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE2" unique_id=1007560160]
+position = Vector2(366, 111)
+script = ExtResource("11_6ays4")
+metadata/_custom_type_script = "uid://cgv82amncyx68"
+
+[node name="DialogText2" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=72434651]
+script = ExtResource("9_bchre")
+text = "
+Yes... I see..."
+npc_info = ExtResource("6_86h4m")
+
+[node name="DialogText3" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=15568015]
+script = ExtResource("9_bchre")
+text = "
+Indeed, there is power within you..."
+npc_info = ExtResource("6_86h4m")
+
+[node name="DialogText4" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=232324589]
+script = ExtResource("9_bchre")
+text = "
+Have you taken the oath of the warrior?"
+npc_info = ExtResource("6_86h4m")
+
+[node name="DialogText5" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=42446444]
+script = ExtResource("9_bchre")
+text = "I have only begun my training. I fear I am not ready to be tested.
+What must I do to prove my readiness?"
+npc_info = ExtResource("12_hvxrb")
+
+[node name="DialogText6" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=480734920]
+script = ExtResource("9_bchre")
+text = "Perhaps, if you could send this pot over
+those hills. Such a feat would show that
+you are most worthy."
+npc_info = ExtResource("6_86h4m")
+
+[node name="DialogText7" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=1205293026]
+script = ExtResource("9_bchre")
+text = "
+I'll try..."
+npc_info = ExtResource("12_hvxrb")
+
+[node name="DialogCutscene_MOVE3" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=227017611]
+script = ExtResource("11_86h4m")
+npc_info = ExtResource("6_86h4m")
+metadata/_custom_type_script = "uid://0mcihlaufovq"
+
+[node name="CutsceneActionPlayer" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE3" unique_id=29372084]
+position = Vector2(392, 119)
+script = ExtResource("10_bchre")
+timing_method = 1
+move_speed = 50.0
+animation_speed_factor = 50.0
+metadata/_custom_type_script = "uid://bn3hxd4o1fctj"
+
+[node name="DialogCutscene_MOVE5" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=1248188312]
+script = ExtResource("11_86h4m")
+npc_info = ExtResource("6_86h4m")
+metadata/_custom_type_script = "uid://0mcihlaufovq"
+
+[node name="CutsceneActionPlayer" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE5" unique_id=1683799973]
+position = Vector2(397, 119)
+script = ExtResource("10_bchre")
+finish_direction = "right"
+timing_method = 1
+move_speed = 50.0
+animation_speed_factor = 50.0
+metadata/_custom_type_script = "uid://bn3hxd4o1fctj"
+
+[node name="DialogCutscene_MOVE4" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=1622957967]
+script = ExtResource("11_86h4m")
+playback_mode = 0
+npc_info = ExtResource("6_86h4m")
+metadata/_custom_type_script = "uid://0mcihlaufovq"
+
+[node name="CutsceneActionPlayer2" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE4" unique_id=406976975]
+position = Vector2(392, 119)
+script = ExtResource("10_bchre")
+animation_name = "attack"
+move_duration = 0.3
+scale_animation_with_movement = false
+metadata/_custom_type_script = "uid://bn3hxd4o1fctj"
+
+[node name="CutsceneActionMove" type="Node2D" parent="AreaTrigger/DialogInteraction/DialogCutscene_MOVE4" unique_id=1754087584 node_paths=PackedStringArray("object_to_move")]
+position = Vector2(392, -87)
+script = ExtResource("12_x30po")
+timing_method = 1
+object_to_move = NodePath("../../../../Pot")
+move_speed = 400.0
+metadata/_custom_type_script = "uid://cof5epf5dwei1"
+
+[node name="DialogText8" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=2064012266]
+script = ExtResource("9_bchre")
+text = "
+Wow, you are such a buff and amazing dude!"
+npc_info = ExtResource("6_86h4m")
+
+[node name="DialogText9" type="Node" parent="AreaTrigger/DialogInteraction" unique_id=1881257128]
+script = ExtResource("9_bchre")
+text = "What? Your entire demeanor and manner of speech has changed. Who are you really!?"
+npc_info = ExtResource("12_hvxrb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaTrigger" unique_id=1710633677]
+position = Vector2(378, 144)
+shape = SubResource("RectangleShape2D_hvxrb")
+
+[node name="grass-tiles-01" parent="." unique_id=421867432 instance=ExtResource("3_hh5ne")]
+tile_map_data = PackedByteArray("AAAAAP//AAACAAUAAAAAAAAAAAACAAYAAAAAAAEAAAANAAQAAAAAAAIAAAANAAUAAAAAAAMAAAANAAUAAAAAAAQAAAANAAUAAAAAAAUAAAANAAUAAAAAAAYAAAANAAUAAAAAAAcAAAANAAUAAAAAAAgAAAANAAUAAAABAP//AAADAAUAAAABAAAAAAADAAYAAAABAAEAAAAOAAQAAAABAAIAAAAOAAUAAAABAAMAAAAOAAUAAAABAAQAAAAOAAUAAAABAAUAAAAOAAUAAAABAAYAAAAOAAUAAAABAAcAAAAOAAUAAAABAAgAAAAOAAUAAAACAP//AAAEAAUAAAACAAAAAAAEAAYAAAACAAEAAAACAAAAAAACAAIAAAACAAAAAAACAAMAAAACAAAAAAACAAQAAAACAAAAAAACAAUAAAACAAAAAAACAAYAAAACAAAAAAACAAcAAAACAAAAAAACAAgAAAAKAAQAAAADAP//AAACAAUAAAADAAAAAAACAAYAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAADAAcAAAAAAAAAAAADAAgAAAALAAQAAAAEAP//AAADAAUAAAAEAAAAAAADAAYAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAACAAEAAAAEAAYAAAABAAAAAAAEAAcAAAABAAAAAAAEAAgAAAAMAAQAAAAFAP//AAAEAAUAAAAFAAAAAAAEAAYAAAAFAAEAAAACAAAAAAAFAAIAAAACAAAAAAAFAAMAAAACAAAAAAAFAAQAAAACAAAAAAAFAAUAAAACAAAAAAAFAAYAAAACAAAAAAAFAAcAAAACAAAAAAAFAAgAAAANAAQAAAAGAP//AAACAAUAAAAGAAAAAAACAAYAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAAGAAgAAAALAAQAAAAHAP//AAADAAUAAAAHAAAAAAADAAYAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAHAAcAAAABAAAAAAAHAAgAAAAMAAQAAAAIAP//AAAEAAUAAAAIAAAAAAAEAAYAAAAIAAEAAAACAAAAAAAIAAIAAAACAAAAAAAIAAMAAAACAAAAAAAIAAQAAAACAAAAAAAIAAUAAAACAAAAAAAIAAYAAAACAAAAAAAIAAcAAAACAAAAAAAIAAgAAAANAAQAAAAJAP//AAACAAUAAAAJAAAAAAACAAYAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAALAAQAAAAKAP//AAADAAUAAAAKAAAAAAADAAYAAAAKAAEAAAABAAAAAAAKAAIAAAABAAAAAAAKAAMAAAABAAAAAAAKAAQAAAABAAAAAAAKAAUAAAABAAAAAAAKAAYAAAABAAAAAAAKAAcAAAABAAAAAAAKAAgAAAAMAAQAAAALAP//AAAEAAUAAAALAAAAAAAEAAYAAAALAAEAAAACAAAAAAALAAIAAAACAAAAAAALAAMAAAACAAAAAAALAAQAAAACAAAAAAALAAUAAAACAAAAAAALAAYAAAACAAAAAAALAAcAAAACAAAAAAALAAgAAAANAAQAAAAMAP//AAACAAUAAAAMAAAAAAACAAYAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAAAAAAMAAgAAAALAAQAAAANAP//AAADAAUAAAANAAAAAAADAAYAAAANAAEAAAABAAAAAAANAAIAAAABAAAAAAANAAMAAAABAAAAAAANAAQAAAABAAAAAAANAAUAAAABAAAAAAANAAYAAAABAAAAAAANAAcAAAABAAAAAAANAAgAAAAMAAQAAAAOAP//AAAEAAUAAAAOAAAAAAAEAAYAAAAOAAEAAAACAAAAAAAOAAIAAAACAAAAAAAOAAMAAAACAAAAAAAOAAQAAAACAAAAAAAOAAUAAAACAAAAAAAOAAYAAAACAAAAAAAOAAcAAAACAAAAAAAOAAgAAAANAAQAAAAPAP//AAACAAUAAAAPAAAAAAACAAYAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAAAAAAAAAAPAAcAAAAAAAAAAAAPAAgAAAALAAQAAAAQAP//AAADAAUAAAAQAAAAAAADAAYAAAAQAAEAAAAKAAQAAAAQAAIAAAAKAAUAAAAQAAMAAAAKAAUAAAAQAAQAAAAKAAUAAAAQAAUAAAAKAAUAAAAQAAYAAAAKAAYAAAAQAAcAAAAKAAcAAAAQAAgAAAAMAAQAAAA=")
+
+[node name="PlayerSpawn" parent="." unique_id=1956771990 instance=ExtResource("4_8cg85")]
+position = Vector2(122, 158)
+michael_scene = ExtResource("16_233nq")
+
+[node name="NPC" parent="." unique_id=924853883 instance=ExtResource("5_g6g4m")]
+position = Vector2(322, 154)
+npc_resource = ExtResource("6_86h4m")
+
+[node name="NpcBehaviorWander" parent="NPC" unique_id=1034043422 instance=ExtResource("7_jnq63")]
+wander_range = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=195725305]
+libraries/ = SubResource("AnimationLibrary_4jsar")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1818888053]
+energy = 0.0
+blend_mode = 1
+
+[node name="Pot" parent="." unique_id=1935747226 instance=ExtResource("14_bchre")]
+position = Vector2(392, 104)

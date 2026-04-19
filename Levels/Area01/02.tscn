@@ -1,0 +1,227 @@
+[gd_scene format=4 uid="uid://chcb2oelfl72f"]
+
+[ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_1ohot"]
+[ext_resource type="PackedScene" uid="uid://cq32mohonpsw3" path="res://Tile Maps/grass-tiles-01.tscn" id="3_ukscd"]
+[ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="4_1fp1i"]
+[ext_resource type="PackedScene" uid="uid://diex2e34r23qo" path="res://Tile Maps/shop_tilemap_layer.tscn" id="4_348be"]
+[ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="5_xj8mw"]
+[ext_resource type="PackedScene" uid="uid://bjfv8081u8dra" path="res://Player/michael.tscn" id="6_fw76p"]
+[ext_resource type="PackedScene" uid="uid://bi8crg3nv50qw" path="res://npc/npc.tscn" id="7_62xuh"]
+[ext_resource type="PackedScene" uid="uid://cecpvxcr0tved" path="res://Levels/level_transition_interact.tscn" id="8_0j6pc"]
+[ext_resource type="PackedScene" uid="uid://dapdr3ojo2pha" path="res://npc/npc_behavior_wander.tscn" id="8_f8c10"]
+[ext_resource type="Resource" uid="uid://csvi3x1wp3gy6" path="res://npc/00_npcs/npc_01.tres" id="8_fbvcf"]
+[ext_resource type="Resource" uid="uid://bqfxxks18ou8u" path="res://npc/00_npcs/npc_02.tres" id="8_yuemd"]
+[ext_resource type="PackedScene" uid="uid://b22o8rtjyby8c" path="res://Interactables/dialog/dialog_interaction.tscn" id="10_s1pmn"]
+[ext_resource type="PackedScene" uid="uid://dpenv0euqqlkg" path="res://npc/npc_behavior_patrol.tscn" id="11_q675y"]
+[ext_resource type="Script" uid="uid://7qrcj0xrfdwc" path="res://Interactables/dialog/scripts/dialog_text.gd" id="11_ufet7"]
+[ext_resource type="Resource" uid="uid://cdc3sykvmnn27" path="res://npc/00_npcs/00_hero.tres" id="12_2ebyk"]
+[ext_resource type="PackedScene" uid="uid://dyhn3j7qk4dqw" path="res://npc/patrol_location.tscn" id="12_sc27x"]
+[ext_resource type="Script" uid="uid://bhoxv42n8rdsq" path="res://Interactables/dialog/scripts/dialog_choice.gd" id="16_as0ht"]
+[ext_resource type="Script" uid="uid://c80ln4eok2stu" path="res://Interactables/dialog/scripts/dialog_branch.gd" id="17_lam8a"]
+[ext_resource type="Resource" uid="uid://cvnr3a38pmudn" path="res://quests/recover_lost_flute.tres" id="19_2koiu"]
+[ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="20_mgke4"]
+[ext_resource type="Script" uid="uid://cj17f33sisctc" path="res://quests/utility_nodes/quest_activated_switch.gd" id="21_dorfn"]
+[ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="23_vtf5b"]
+[ext_resource type="Resource" uid="uid://dylmk5rhkvo1d" path="res://Items/ability_boomerang.tres" id="26_s3up8"]
+[ext_resource type="PackedScene" uid="uid://cpohuml8sje4u" path="res://Items/item_pickup/item_pickup.tscn" id="27_s3up8"]
+[ext_resource type="PackedScene" uid="uid://cldjbf03xmdqt" path="res://Interactables/TreasureChest/treasure-chest.tscn" id="27_w21e7"]
+[ext_resource type="Resource" uid="uid://ommu74ikveqs" path="res://Items/ability_arrow.tres" id="28_fw76p"]
+[ext_resource type="Resource" uid="uid://bdcndrurok2ci" path="res://Items/arrow.tres" id="29_vv7nh"]
+[ext_resource type="PackedScene" uid="uid://b0q1f74icbihy" path="res://Interactables/grapple_post/grapple_post.tscn" id="31_s3up8"]
+
+[node name="02" type="Node2D" unique_id=1671670956]
+y_sort_enabled = true
+script = ExtResource("1_1ohot")
+
+[node name="grass-tiles-01" parent="." unique_id=1048572458 instance=ExtResource("3_ukscd")]
+tile_map_data = PackedByteArray("AAD9//7/AAACAAQAAAD9////AAACAAUAAAD9/wAAAAACAAYAAAD9/wEAAAANAAQAAAD9/wIAAAANAAUAAAD9/wMAAAANAAUAAAD9/wQAAAANAAUAAAD9/wUAAAANAAUAAAD9/wYAAAANAAYAAAD9/wcAAAANAAcAAAD9/wgAAAAPAAQAAAD9/wkAAAAPAAUAAAD+//7/AAADAAQAAAD+////AAADAAUAAAD+/wAAAAADAAYAAAD+/wEAAAAOAAQAAAD+/wIAAAAOAAUAAAD+/wMAAAAOAAUAAAD+/wQAAAAOAAUAAAD+/wUAAAAOAAUAAAD+/wYAAAAOAAYAAAD+/wcAAAAOAAcAAAD+/wgAAAAPAAQAAAD+/wkAAAAPAAUAAAD///7/AAAEAAQAAAD/////AAAEAAUAAAD//wAAAAAEAAYAAAD//wEAAAACAAAAAAD//wIAAAACAAAAAAD//wMAAAACAAAAAAD//wQAAAACAAAAAAD//wUAAAAAAAIAAAD//wYAAAAAAAAAAAD//wcAAAAAAAMAAAD//wgAAAAPAAQAAAD//wkAAAAPAAUAAAAAAP7/AAAEAAQAAAAAAP//AAAEAAUAAAAAAAAAAAAEAAYAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAMAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAACAAEAAAAAAAYAAAABAAMAAAAAAAcAAAAAAAAAAAAAAAgAAAAPAAQAAAAAAAkAAAAPAAUAAAABAP7/AAACAAQAAAABAP//AAACAAUAAAABAAAAAAACAAYAAAABAAEAAAABAAAAAAABAAIAAAABAAIAAAABAAMAAAABAAAAAAABAAQAAAAFAAAAAAABAAUAAAAEAAEAAAABAAYAAAAEAAIAAAABAAcAAAACAAEAAAABAAgAAAAPAAQAAAABAAkAAAAPAAUAAAACAP7/AAADAAQAAAACAP//AAADAAUAAAACAAAAAAADAAYAAAACAAEAAAABAAMAAAACAAIAAAABAAEAAAACAAMAAAACAAAAAAACAAQAAAAGAAMAAAACAAUAAAACAAAAAAACAAYAAAABAAEAAAACAAcAAAAFAAMAAAACAAgAAAAPAAQAAAACAAkAAAAPAAUAAAADAP7/AAAEAAQAAAADAP//AAAEAAUAAAADAAAAAAAEAAYAAAADAAEAAAAAAAEAAAADAAIAAAAAAAIAAAADAAMAAAADAAAAAAADAAQAAAAGAAMAAAADAAUAAAADAAAAAAADAAYAAAADAAAAAAADAAcAAAAGAAMAAAADAAgAAAAPAAQAAAADAAkAAAAPAAUAAAAEAP7/AAACAAQAAAAEAP//AAADAAUAAAAEAAAAAAANAAcAAAAEAAEAAAAAAAAAAAAEAAIAAAABAAIAAAAEAAMAAAAAAAAAAAAEAAQAAAAGAAMAAAAEAAUAAAAAAAAAAAAEAAYAAAAEAAAAAAAEAAcAAAAHAAIAAAAEAAgAAAAPAAQAAAAEAAkAAAAPAAUAAAAFAP7/AAACAAQAAAAFAP//AAACAAUAAAAFAAAAAAACAAYAAAAFAAEAAAABAAAAAAAFAAIAAAAAAAMAAAAFAAMAAAAAAAIAAAAFAAQAAAAGAAMAAAAFAAUAAAABAAAAAAAFAAYAAAABAAAAAAAFAAcAAAABAAAAAAAFAAgAAAAPAAQAAAAFAAkAAAAPAAUAAAAGAP7/AAADAAQAAAAGAP//AAADAAUAAAAGAAAAAAADAAYAAAAGAAEAAAAMAAMAAAAGAAIAAAACAAAAAAAGAAMAAAACAAAAAAAGAAQAAAAGAAMAAAAGAAUAAAACAAAAAAAGAAYAAAACAAAAAAAGAAcAAAACAAAAAAAGAAgAAAAPAAQAAAAGAAkAAAAPAAUAAAAHAP7/AAACAAQAAAAHAP//AAACAAUAAAAHAAAAAAACAAYAAAAHAAEAAAALAAIAAAAHAAIAAAAEAAEAAAAHAAMAAAAIAAEAAAAHAAQAAAAJAAMAAAAHAAUAAAADAAAAAAAHAAYAAAADAAAAAAAHAAcAAAAAAAAAAAAHAAgAAAAPAAQAAAAHAAkAAAAPAAUAAAAIAAIAAAAAAAAAAAAIAAMAAAAPAAAAAAAIAAQAAAAOAAIAAAAIAAUAAAAMAAMAAAAIAAYAAAAAAAAAAAAIAAcAAAABAAIAAAAIAAgAAAAPAAQAAAAIAAkAAAAPAAUAAAAJAAQAAAAKAAAAAAAJAAUAAAALAAIAAAAJAAYAAAAFAAIAAAAJAAcAAAAAAAIAAAAJAAgAAAAPAAQAAAAJAAkAAAAPAAUAAAAKAAQAAAAHAAMAAAAKAAUAAAACAAAAAAAKAAYAAAAGAAMAAAAKAAcAAAAAAAIAAAAKAAgAAAAPAAQAAAAKAAkAAAAPAAUAAAALAAQAAAADAAAAAAALAAUAAAADAAAAAAALAAYAAAAGAAMAAAALAAcAAAABAAEAAAALAAgAAAAPAAQAAAALAAkAAAAPAAUAAAAMAAQAAAAIAAIAAAAMAAUAAAAEAAEAAAAMAAYAAAAHAAIAAAAMAAcAAAAAAAAAAAAMAAgAAAAPAAQAAAAMAAkAAAAPAAUAAAANAAQAAAAPAAMAAAANAAUAAAABAAAAAAANAAYAAAABAAAAAAANAAcAAAABAAAAAAANAAgAAAAPAAQAAAANAAkAAAAPAAUAAAAOAAQAAAAKAAQAAAAOAAUAAAAKAAUAAAAOAAYAAAAKAAYAAAAOAAcAAAAKAAcAAAAOAAgAAAAPAAQAAAAOAAkAAAAPAAUAAAAPAAQAAAALAAQAAAAPAAUAAAALAAUAAAAPAAYAAAALAAYAAAAPAAcAAAALAAcAAAAPAAgAAAAPAAQAAAAPAAkAAAAPAAUAAAAIAP7/AAADAAQAAAAIAP//AAADAAUAAAAIAAAAAAADAAYAAAAIAAEAAAAAAAAAAAAJAP7/AAAEAAQAAAAJAP//AAAEAAUAAAAJAAAAAAAEAAYAAAAJAAEAAAABAAAAAAAJAAIAAAABAAAAAAAJAAMAAAABAAAAAAAKAP7/AAACAAQAAAAKAP//AAACAAUAAAAKAAAAAAACAAYAAAAKAAEAAAACAAAAAAAKAAIAAAAFAAMAAAAKAAMAAAACAAAAAAALAP7/AAADAAQAAAALAP//AAADAAUAAAALAAAAAAADAAYAAAALAAEAAAADAAAAAAALAAIAAAAGAAMAAAALAAMAAAADAAAAAAAMAP7/AAAEAAQAAAAMAP//AAAEAAUAAAAMAAAAAAAEAAYAAAAMAAEAAAAAAAAAAAAMAAIAAAAHAAAAAAAMAAMAAAAIAAEAAAANAP7/AAACAAQAAAANAP//AAACAAUAAAANAAAAAAACAAYAAAANAAEAAAABAAAAAAANAAIAAAABAAAAAAANAAMAAAAPAAAAAAAOAP7/AAADAAQAAAAOAP//AAADAAUAAAAOAAAAAAADAAYAAAAPAP7/AAAEAAQAAAAPAP//AAAEAAUAAAAPAAAAAAAEAAYAAAAOAAEAAAAAAAAAAAAOAAIAAAAAAAEAAAAOAAMAAAAAAAIAAAAPAAEAAAAKAAQAAAAPAAIAAAAKAAYAAAAPAAMAAAAKAAcAAAD9/woAAAAPAAcAAAD+/woAAAAPAAcAAAD//woAAAAPAAcAAAAAAAoAAAAPAAcAAAABAAoAAAAPAAcAAAACAAoAAAAPAAcAAAADAAoAAAAPAAcAAAAEAAoAAAAPAAcAAAAFAAoAAAAPAAcAAAAGAAoAAAAPAAcAAAAHAAoAAAAPAAcAAAAIAAoAAAAPAAcAAAAJAAoAAAAPAAcAAAAKAAoAAAAPAAcAAAALAAoAAAAPAAcAAAAMAAoAAAAPAAcAAAANAAoAAAAPAAcAAAAOAAoAAAAPAAcAAAAPAAoAAAAPAAcAAAD9/wsAAAANAAQAAAD9/wwAAAANAAUAAAD9/w0AAAANAAUAAAD9/w4AAAANAAYAAAD+/wsAAAAOAAQAAAD+/wwAAAAOAAUAAAD+/w0AAAAOAAUAAAD+/w4AAAAOAAYAAAD9/w8AAAANAAcAAAD+/w8AAAAOAAcAAAAOAAsAAAAKAAQAAAAOAAwAAAAKAAUAAAAPAAsAAAALAAQAAAAPAAwAAAALAAUAAAAOAA0AAAAKAAUAAAAOAA4AAAAKAAYAAAAOAA8AAAAKAAcAAAAPAA0AAAALAAUAAAAPAA4AAAALAAYAAAAPAA8AAAALAAcAAAD9/xAAAAAKAAQAAAD9/xEAAAAKAAUAAAD+/xAAAAALAAQAAAD+/xEAAAALAAUAAAD//xAAAAAMAAQAAAD//xEAAAAMAAUAAAAOABAAAAANAAQAAAAOABEAAAANAAUAAAAPABAAAAAOAAQAAAAPABEAAAAOAAUAAAAAABAAAAALAAQAAAAAABEAAAALAAUAAAABABAAAAAMAAQAAAABABEAAAAMAAUAAAACABAAAAANAAQAAAACABEAAAANAAUAAAADABAAAAALAAQAAAADABEAAAALAAUAAAAEABAAAAAMAAQAAAAEABEAAAAMAAUAAAAFABAAAAANAAQAAAAFABEAAAANAAUAAAAGABAAAAALAAQAAAAGABEAAAALAAUAAAAHABAAAAAMAAQAAAAHABEAAAAMAAUAAAAIABAAAAANAAQAAAAIABEAAAANAAUAAAAJABAAAAALAAQAAAAJABEAAAALAAUAAAAKABAAAAAMAAQAAAAKABEAAAAMAAUAAAALABAAAAANAAQAAAALABEAAAANAAUAAAAMABAAAAALAAQAAAAMABEAAAALAAUAAAANABAAAAAMAAQAAAANABEAAAAMAAUAAAADAA4AAAABAAIAAAADAA0AAAACAAEAAAADAAwAAAAAAAEAAAADAAsAAAADAAEAAAACAAsAAAACAAIAAAABAAsAAAADAAAAAAAAAAsAAAABAAEAAAD//wsAAAABAAIAAAD//wwAAAAAAAEAAAD//w0AAAAAAAIAAAD//w4AAAAAAAMAAAD//w8AAAADAAEAAAAAAA8AAAABAAEAAAAAAA4AAAAAAAEAAAAAAA0AAAAAAAMAAAAAAAwAAAAAAAIAAAABAAwAAAADAAAAAAABAA0AAAAAAAEAAAABAA4AAAABAAMAAAABAA8AAAAAAAMAAAACAA8AAAABAAMAAAACAA4AAAACAAEAAAACAA0AAAACAAAAAAACAAwAAAABAAEAAAADAA8AAAAAAAMAAAAEAA8AAAABAAEAAAAEAA4AAAAAAAEAAAAEAA0AAAABAAIAAAAEAAwAAAADAAEAAAAEAAsAAAAAAAIAAAAFAAsAAAACAAIAAAAFAAwAAAACAAIAAAAFAA0AAAAAAAIAAAAFAA4AAAACAAMAAAAFAA8AAAADAAAAAAAGAA8AAAADAAMAAAAGAA4AAAADAAIAAAAGAA0AAAACAAIAAAAGAAwAAAADAAMAAAAGAAsAAAADAAEAAAAHAAsAAAAAAAMAAAAHAAwAAAADAAAAAAAHAA0AAAADAAMAAAAHAA4AAAACAAAAAAAHAA8AAAADAAIAAAAIAA8AAAABAAEAAAAIAA4AAAADAAIAAAAIAA0AAAADAAAAAAAIAAwAAAACAAIAAAAIAAsAAAAAAAAAAAAJAAsAAAACAAEAAAAJAAwAAAACAAIAAAAJAA0AAAADAAIAAAAJAA4AAAADAAMAAAAJAA8AAAABAAMAAAAKAA8AAAADAAEAAAAKAA4AAAADAAMAAAAKAA0AAAABAAMAAAAKAAwAAAABAAMAAAAKAAsAAAADAAEAAAALAAsAAAAAAAIAAAALAAwAAAAAAAEAAAALAA0AAAACAAMAAAALAA4AAAABAAIAAAALAA8AAAABAAIAAAAMAA8AAAAAAAIAAAAMAA4AAAADAAAAAAAMAA0AAAACAAEAAAAMAAwAAAABAAMAAAAMAAsAAAAAAAIAAAANAAsAAAAAAAMAAAANAAwAAAABAAAAAAANAA0AAAACAAMAAAANAA4AAAACAAAAAAANAA8AAAAAAAIAAAA=")
+
+[node name="ShopTilemapLayer" parent="." unique_id=1509299173 instance=ExtResource("4_348be")]
+tile_map_data = PackedByteArray("AAAIAP7/AAAKAAoAAAAIAP//AAAKAAoAAAAIAAAAAAAKAAoAAAAIAAEAAAAKAAsAAAAJAP7/AAALAAkAAAAJAP//AAALAAkAAAAJAAAAAAALAAoAAAAJAAEAAAALAAsAAAAJAAIAAAAKAAwAAAAJAAMAAAAKAA0AAAAKAP7/AAALAAkAAAAKAP//AAALAAoAAAAKAAAAAAALAAsAAAAKAAEAAAAMAAsAAAAKAAIAAAAKAA4AAAAKAAMAAAAKAA8AAAALAP7/AAAMAAkAAAALAP//AAAMAAoAAAALAAAAAAAMAAwAAAALAAEAAAAMAAwAAAALAAIAAAALAA4AAAALAAMAAAALAA8AAAAMAP7/AAANAAkAAAAMAP//AAANAAoAAAAMAAAAAAANAAsAAAAMAAEAAAAMAAwAAAAMAAIAAAAMAA4AAAAMAAMAAAAMAA8AAAANAP7/AAALAAkAAAANAP//AAAOAAoAAAANAAAAAAAOAAsAAAANAAEAAAANAAsAAAANAAIAAAANAA4AAAANAAMAAAANAA8AAAAOAP7/AAALAAkAAAAOAP//AAALAAkAAAAOAAAAAAAOAAoAAAAOAAEAAAAOAAsAAAAOAAIAAAAOAAwAAAAOAAMAAAAOAA0AAAAPAP7/AAAPAAoAAAAPAP//AAAPAAoAAAAPAAAAAAAPAAoAAAAPAAEAAAAPAAsAAAA=")
+update_bounds = false
+
+[node name="PlayerSpawn" parent="." unique_id=28773130 instance=ExtResource("4_1fp1i")]
+position = Vector2(227, 138)
+michael_scene = ExtResource("6_fw76p")
+
+[node name="LevelTransition" parent="." unique_id=514254245 instance=ExtResource("5_xj8mw")]
+position = Vector2(440, -95)
+level = "res://Levels/Area01/01.tscn"
+side = 2
+
+[node name="LevelTransition_Shop" parent="." unique_id=2115380343 instance=ExtResource("8_0j6pc")]
+position = Vector2(416, 123)
+level = "uid://2p13wtrmfvqv"
+center_player = true
+size = 1
+side = 2
+
+[node name="NPC" parent="." unique_id=1258697946 instance=ExtResource("7_62xuh")]
+position = Vector2(62.0707, 143.942)
+npc_resource = ExtResource("8_fbvcf")
+
+[node name="NpcBehaviorWander" parent="NPC" unique_id=369857762 instance=ExtResource("8_f8c10")]
+wander_range = 1
+
+[node name="DialogInteraction" parent="NPC" unique_id=899263053 instance=ExtResource("10_s1pmn")]
+
+[node name="DialogText" type="Node" parent="NPC/DialogInteraction" unique_id=256479515]
+script = ExtResource("11_ufet7")
+text = "
+Hola, [b]Elizabeth.[b] Necesitas algo?"
+npc_info = ExtResource("8_fbvcf")
+
+[node name="DialogText2" type="Node" parent="NPC/DialogInteraction" unique_id=413908309]
+script = ExtResource("11_ufet7")
+text = "
+[wave]Hola, Has visto algo raro por aqui?[/wave]"
+npc_info = ExtResource("12_2ebyk")
+
+[node name="DialogText3" type="Node" parent="NPC/DialogInteraction" unique_id=575015340]
+script = ExtResource("11_ufet7")
+text = "No, todo ha estado normal."
+npc_info = ExtResource("8_fbvcf")
+
+[node name="NPC_NERO" parent="." unique_id=41559783 instance=ExtResource("7_62xuh")]
+position = Vector2(329, 172)
+npc_resource = ExtResource("8_yuemd")
+
+[node name="NpcBehaviorPatrol" parent="NPC_NERO" unique_id=1388283186 instance=ExtResource("11_q675y")]
+
+[node name="PatrolLocation" parent="NPC_NERO/NpcBehaviorPatrol" unique_id=1589557884 instance=ExtResource("12_sc27x")]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(67.059, -12)
+
+[node name="PatrolLocation2" parent="NPC_NERO/NpcBehaviorPatrol" unique_id=125481628 instance=ExtResource("12_sc27x")]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(66.059, 61)
+
+[node name="PatrolLocation3" parent="NPC_NERO/NpcBehaviorPatrol" unique_id=555714987 instance=ExtResource("12_sc27x")]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(-16, 89)
+wait_time = 3.0
+
+[node name="PatrolLocation4" parent="NPC_NERO/NpcBehaviorPatrol" unique_id=1699014147 instance=ExtResource("12_sc27x")]
+modulate = Color(0, 1, 1, 1)
+position = Vector2(-76, -3)
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO" unique_id=1896044241 instance=ExtResource("23_vtf5b")]
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("19_2koiu")
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if player has quest"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch" unique_id=238209263 instance=ExtResource("10_s1pmn")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction" unique_id=2029425667]
+script = ExtResource("11_ufet7")
+text = "Elizabeth, he notado movimientos raros en el laboratorio"
+npc_info = ExtResource("8_yuemd")
+
+[node name="DialogChoice" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction" unique_id=155230771]
+script = ExtResource("16_as0ht")
+npc_info = ExtResource("8_yuemd")
+
+[node name="DialogBranch" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice" unique_id=706200813]
+script = ExtResource("17_lam8a")
+text = "Michael ha desaparecido y no se donde buscarlo"
+npc_info = ExtResource("8_yuemd")
+
+[node name="QuestAdvanceTrigger" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" unique_id=1819472454 instance=ExtResource("20_mgke4")]
+position = Vector2(331, 171)
+signal_name = "selected"
+linked_quest = ExtResource("19_2koiu")
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Step: 0 - N/A
+Complete: false"
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" unique_id=738464376]
+script = ExtResource("11_ufet7")
+text = "Hay un mito que dice que experimentan con niños en el laboratorio, pero nadie ha descubierto como se los llevan"
+npc_info = ExtResource("8_yuemd")
+
+[node name="DialogText2" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch" unique_id=1188122009]
+script = ExtResource("11_ufet7")
+text = "Deberias buscarlo ahi pero ser cuidadoso con los guardias."
+npc_info = ExtResource("8_yuemd")
+
+[node name="DialogBranch2" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice" unique_id=1697569351]
+script = ExtResource("17_lam8a")
+text = "Que crees que pasaria si voy al laboratorio?"
+npc_info = ExtResource("8_yuemd")
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction/DialogChoice/DialogBranch2" unique_id=328300475]
+script = ExtResource("11_ufet7")
+text = "Bueno, deberias tener cuidado si no hay un motivo para ir, no deberias estar cerca de ahi"
+npc_info = ExtResource("8_yuemd")
+
+[node name="QuestActivatedSwitch3" type="Node2D" parent="NPC_NERO" unique_id=2033451201]
+script = ExtResource("21_dorfn")
+check_type = 3
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("19_2koiu")
+quest_complete = true
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if quest is complete"
+
+[node name="QuestActivatedSwitch2" parent="NPC_NERO/QuestActivatedSwitch3" unique_id=1874463122 instance=ExtResource("23_vtf5b")]
+position = Vector2(0, -18)
+react_to_global_signal = true
+linked_quest = ExtResource("19_2koiu")
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Checking if player has quest"
+
+[node name="QuestActivatedSwitch2" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2" unique_id=75550817 instance=ExtResource("23_vtf5b")]
+check_type = 2
+remove_when_activated = true
+react_to_global_signal = true
+linked_quest = ExtResource("19_2koiu")
+quest_step = 3
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Check if player is on step: return magical flute to nero"
+
+[node name="DialogInteraction" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch2" unique_id=1713855295 instance=ExtResource("10_s1pmn")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch2/DialogInteraction" unique_id=1540599634]
+script = ExtResource("11_ufet7")
+text = "Si fuera yo me daria mucho miedo ir a ese laboratorio.."
+npc_info = ExtResource("8_yuemd")
+
+[node name="QuestActivatedSwitch" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2" unique_id=1900805116 instance=ExtResource("23_vtf5b")]
+check_type = 2
+react_to_global_signal = true
+linked_quest = ExtResource("19_2koiu")
+quest_step = 3
+settings_summary = "UPDATE QUEST:
+Quest: Recover Lost Magical Flute
+Check if player is on step: return magical flute to nero"
+
+[node name="DialogInteraction2" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch" unique_id=1554004094 instance=ExtResource("10_s1pmn")]
+
+[node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch3/QuestActivatedSwitch2/QuestActivatedSwitch/DialogInteraction2" unique_id=819884817]
+script = ExtResource("11_ufet7")
+text = "Que pasa..?"
+npc_info = ExtResource("8_yuemd")
+
+[node name="Treasure-chest2" parent="." unique_id=1379046853 instance=ExtResource("27_w21e7")]
+position = Vector2(-12, 199)
+item_data = ExtResource("26_s3up8")
+
+[node name="Treasure-chest4" parent="." unique_id=861106687 instance=ExtResource("27_w21e7")]
+position = Vector2(23, 199)
+item_data = ExtResource("28_fw76p")
+
+[node name="ItemPickup3" parent="." unique_id=462936653 instance=ExtResource("27_s3up8")]
+position = Vector2(23, 226)
+item_data = ExtResource("29_vv7nh")
+item_count = 10
+
+[node name="GrapplePost2" parent="." unique_id=939490736 instance=ExtResource("31_s3up8")]
+position = Vector2(-8, 415)
