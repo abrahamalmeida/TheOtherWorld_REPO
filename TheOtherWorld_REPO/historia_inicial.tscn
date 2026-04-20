@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://chwsygxlg5nn8"]
+
+[ext_resource type="Script" uid="uid://cw7puqyt2i2m1" path="res://historia_inicial.gd" id="1_0lfh6"]
+
+[node name="HistoriaInicial" type="CanvasLayer" unique_id=1059665166]
+process_mode = 3
+layer = 2
+script = ExtResource("1_0lfh6")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=439417071]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=2015662051]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 36.0
+offset_right = 438.0
+offset_bottom = 225.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+text = "Octubre, 2000
+
+La noche transcurría con la calma de siempre. Elizabeth y Michael estaban juntos, perdidos en una conversación que parecía no tener fin.
+
+De repente, las luces parpadearon. El aire se volvió gélido, un frío que calaba los huesos y traía consigo un olor a tierra húmeda y estática.
+
+Michael se detuvo a mitad de una frase. Su mirada se fijó en un rincón oscuro de la habitación donde las sombras empezaron a retorcerse.
+
+— \"Elizabeth... corre\" — fue lo último que pudo articular.
+
+Una mano esquelética y grisácea emergió de la oscuridad absoluta. Esa presencia innombrable envolvió a Michael. No hubo gritos, solo el sonido de algo desgarrándose en el aire.
+
+Michael se había ido, arrastrado hacia el Plano Residual. Elizabeth quedó sola, frente a una oscuridad que aún parecía observar.
+
+[Presiona ENTER para continuar]"
+scroll_active = false
+visible_characters = 0
+visible_ratio = 0.0
