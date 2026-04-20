@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bcskysr5no5a6" path="res://Tile Maps/dungeon_tiles_01.tscn" id="3_bpaqg"]
 [ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="3_sp6rm"]
 [ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="4_bwwsp"]
+[ext_resource type="PackedScene" uid="uid://dun2fbsf41obt" path="res://Enemies/goblin/cientifoco.tscn" id="4_gmq4b"]
 [ext_resource type="PackedScene" uid="uid://ch2oxh3rsa2fr" path="res://Interactables/dungeon/pressure_plate.tscn" id="5_hd3kv"]
 [ext_resource type="PackedScene" uid="uid://da4qq8gb0idce" path="res://Interactables/dungeon/barred_door.tscn" id="6_ffenb"]
 [ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="6_ndegm"]
@@ -25,8 +26,14 @@ tile_map_data = PackedByteArray("AAADAAAAAgABAAgAAAADAAEAAgABAAkAAAAEAAAAAgACAAg
 [node name="Dungeon Tiles 03" parent="." unique_id=606015112 instance=ExtResource("3_bpaqg")]
 tile_map_data = PackedByteArray("AAADAAMAAgAEAAcAAAADAAQAAgAEAAcAAAAGAAEAAgAEAAcAAAAEAAEAAgAEAAcAAAAEAAQAAgAFAAYAAAAEAAUAAgAFAAcAAAAIAAEAAgAPAAAAAAA=")
 
+[node name="Goblin" parent="." unique_id=1416626959 instance=ExtResource("4_gmq4b")]
+position = Vector2(262, 88)
+
+[node name="Goblin2" parent="." unique_id=1803239602 instance=ExtResource("4_gmq4b")]
+position = Vector2(141, 83)
+
 [node name="PlayerSpawn" parent="." unique_id=1681734453 instance=ExtResource("3_sp6rm")]
-position = Vector2(256, 173)
+position = Vector2(209, 128)
 
 [node name="LevelTransition" parent="." unique_id=1707882704 instance=ExtResource("4_bwwsp")]
 position = Vector2(256, 205)
