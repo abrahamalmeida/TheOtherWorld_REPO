@@ -78,5 +78,5 @@ func saltar_a_nivel():
 		PlayerHud.update_hp(PlayerManager.player.hp, PlayerManager.player.max_hp)
 
 	PlayerManager.force_player_reset()
-	LevelManager.load_new_level("res://Levels/Area01/02.tscn", "", Vector2.ZERO)
+	LevelManager.load_new_level("res://Levels/Area01/02_shop.tscn", "", Vector2.ZERO)
 	queue_free()
