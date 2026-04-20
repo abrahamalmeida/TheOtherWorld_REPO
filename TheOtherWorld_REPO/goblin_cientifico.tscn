@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b4ki4j1o0157r"]
+
+[ext_resource type="PackedScene" uid="uid://bxnynmne8hsl2" path="res://Enemies/goblin/goblin.tscn" id="1_f1578"]
+[ext_resource type="Texture2D" uid="uid://c0g7yeifqlcgb" path="res://Sotano/cientifico prueba.png" id="2_83fyk"]
+
+[node name="Goblin" unique_id=1071589499 instance=ExtResource("1_f1578")]
+
+[node name="Sprite2D" parent="." index="3" unique_id=411845771]
+texture = ExtResource("2_83fyk")
