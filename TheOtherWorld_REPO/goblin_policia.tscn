@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://diys5ob8jp22a"]
+
+[ext_resource type="PackedScene" uid="uid://bxnynmne8hsl2" path="res://Enemies/goblin/goblin.tscn" id="1_s55yy"]
+[ext_resource type="Texture2D" uid="uid://c7j405ks2ox1n" path="res://Sotano/policia prueba.png" id="2_a4jrn"]
+
+[node name="Goblin" unique_id=1071589499 instance=ExtResource("1_s55yy")]
+
+[node name="Sprite2D" parent="." index="3" unique_id=411845771]
+texture = ExtResource("2_a4jrn")

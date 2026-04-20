@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="4_po0y8"]
 [ext_resource type="PackedScene" uid="uid://b4ki4j1o0157r" path="res://goblin_cientifico.tscn" id="7_m2303"]
 [ext_resource type="PackedScene" uid="uid://2cd7gjm7n6in" path="res://goblin_esqueleto.tscn" id="8_m7vwt"]
+[ext_resource type="PackedScene" uid="uid://diys5ob8jp22a" path="res://goblin_policia.tscn" id="9_m7vwt"]
 
 [node name="02" type="Node2D" unique_id=1400955498]
 script = ExtResource("1_b5e4r")
@@ -43,3 +44,6 @@ position = Vector2(153, -15)
 
 [node name="Goblin2" parent="." unique_id=431369979 instance=ExtResource("8_m7vwt")]
 position = Vector2(368, 5)
+
+[node name="Goblin3" parent="." unique_id=1566744692 instance=ExtResource("9_m7vwt")]
+position = Vector2(253, 62)
