@@ -30,7 +30,7 @@ tile_map_data = PackedByteArray("AAADAAMAAgAEAAcAAAADAAQAAgAEAAcAAAAGAAEAAgAEAAc
 position = Vector2(262, 88)
 
 [node name="Goblin2" parent="." unique_id=1803239602 instance=ExtResource("4_gmq4b")]
-position = Vector2(141, 83)
+position = Vector2(143, 91)
 
 [node name="PlayerSpawn" parent="." unique_id=1681734453 instance=ExtResource("3_sp6rm")]
 position = Vector2(209, 128)

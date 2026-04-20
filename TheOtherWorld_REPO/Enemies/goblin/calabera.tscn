@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cpvl4rru3x52v" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="2_keobv"]
 [ext_resource type="PackedScene" uid="uid://c041sb462wu22" path="res://GeneralNodes/HitBox/hit_box.tscn" id="3_g0ei1"]
 [ext_resource type="Texture2D" uid="uid://dxda6pdclrpa" path="res://Player/Sprites/Shadow.png" id="4_emkjr"]
-[ext_resource type="Texture2D" uid="uid://c0g7yeifqlcgb" path="res://Sotano/cientifico prueba.png" id="5_0ethv"]
+[ext_resource type="Texture2D" uid="uid://bx5micf25lv7t" path="res://Sotano/esqueleto prueba.png" id="5_11p4n"]
 [ext_resource type="AudioStream" uid="uid://d1jsxmech6qvu" path="res://Enemies/Slime/hit_01.wav" id="6_xtmlh"]
 [ext_resource type="AudioStream" uid="uid://jq0tgmmg5c80" path="res://Enemies/Slime/hit_00.wav" id="7_5t634"]
 [ext_resource type="Script" uid="uid://ktscfjqbpjb" path="res://Enemies/Scripts/enemy_state_machine.gd" id="8_03hge"]
@@ -756,7 +756,7 @@ texture = ExtResource("4_emkjr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=755008009]
 position = Vector2(0, -14)
-texture = ExtResource("5_0ethv")
+texture = ExtResource("5_11p4n")
 hframes = 8
 vframes = 3
 
