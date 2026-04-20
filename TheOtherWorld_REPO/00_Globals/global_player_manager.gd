@@ -9,79 +9,128 @@ signal camera_shook( trauma : float )
 signal interact_pressed
 signal player_leveled_up
 
-var interact_handled : bool = true
-var level_requirements = [ 0, 5, 10, 20, 40, 80, 160 ] # Cantidad de XP para cada nivel
-
-# 2. VARIABLES DE PERSONAJES Y PROGRESIÓN
+# 2. VARIABLES DE ESTADO Y PROGRESIÓN
 var elizabeth : Player
 var michael : CharacterBody2D
 var player : CharacterBody2D 
 var player_spawned : bool = false
 
+# Lógica de la Placa y Cambio
+var puede_cambiar_a_michael : bool = false # Se activa con la placa
+var ya_cambio_una_vez : bool = false       # Bloquea el regreso
+
 var current_xp : int = 0
 var current_level : int = 1
+var level_requirements = [ 0, 5, 10, 20, 40, 80, 160 ]
 
 func _ready() -> void:
 	elizabeth = PLAYER.instantiate()
 	michael = MICHAEL_SCENE.instantiate()
-	
-	player = elizabeth # Elizabeth por defecto
+	player = elizabeth 
 	
 	add_child(elizabeth)
 	add_child(michael)
 	
-	elizabeth.visible = false
-	elizabeth.process_mode = Node.PROCESS_MODE_DISABLED
-	michael.visible = false
-	michael.process_mode = Node.PROCESS_MODE_DISABLED
+	_desactivar_personaje(elizabeth)
+	_desactivar_personaje(michael)
 
-# --- DETECCIÓN DE ENTRADA (H) ---
+# --- SISTEMA DE INPUT (C e H) ---
 func _unhandled_input(event: InputEvent) -> void:
+	# Interacción (Tecla C)
+	if event.is_action_pressed("interact"):
+		interact()
+
+	# Cambio a Michael (Tecla H)
 	if event.is_action_pressed("cambiar_personaje"):
-		cambiar_mundo_por_personaje()
+		if puede_cambiar_a_michael and not ya_cambio_una_vez:
+			ya_cambio_una_vez = true 
+			viaje_unico_a_michael()
+		else:
+			if ya_cambio_una_vez:
+				print("Ya eres Michael, no hay vuelta atrás.")
+			else:
+				print("La placa no ha sido activada.")
 
-func cambiar_mundo_por_personaje() -> void:
-	var path_escena : String = ""
-	if player == elizabeth:
-		path_escena = "res://Levels/Area01/02.tscn"
-	elif player == michael:
-		path_escena = "res://Levels/Dungeon01/02.tscn"
+func viaje_unico_a_michael() -> void:
+	# Sacamos a Elizabeth del mapa
+	if elizabeth.get_parent() and elizabeth.get_parent() != self:
+		elizabeth.get_parent().remove_child(elizabeth)
+		add_child(elizabeth)
+	_desactivar_personaje(elizabeth)
+
+	# El jefe ahora es Michael
+	player = michael
 	
-	if path_escena != "":
-		var lm = get_node_or_null("/root/GlobalLevelManager")
-		if not lm: lm = get_node_or_null("/root/LevelManager")
-		
-		if lm:
-			lm.load_new_level(path_escena, "", Vector2.ZERO)
-
-# --- 3. FUNCIONES DE LÓGICA GLOBAL ---
-
-## SOLUCIÓN AL ERROR: Función para recompensar XP
-func reward_xp( amount : int ) -> void:
-	current_xp += amount
-	print("¡XP Ganada: ", amount, "! XP Total: ", current_xp)
+	var path_escena : String = "res://Levels/Dungeon01/02.tscn"
+	var lm = get_node_or_null("/root/GlobalLevelManager")
+	if not lm: lm = get_node_or_null("/root/LevelManager")
 	
-	# Verificar si sube de nivel
-	if current_level < level_requirements.size():
-		if current_xp >= level_requirements[current_level]:
-			current_level += 1
-			player_leveled_up.emit()
-			print("¡Subiste al nivel ", current_level, "!")
+	if lm:
+		# AJUSTA ESTO: Pon la posición X, Y donde debe aparecer Michael en la Dungeon
+		var spawn_dungeon = Vector2(200, 200) 
+		lm.load_new_level(path_escena, "", Vector2.ZERO, spawn_dungeon)
 
-## Función para manejar la interacción
 func interact() -> void:
 	if is_instance_valid(player):
-		if player.has_method("interact"):
+		if player.has_method("player_interact"):
+			player.player_interact()
+		elif player.has_method("interact"):
 			player.interact()
 		else:
 			interact_pressed.emit()
 
-func unparent_player( _p : Node2D ) -> void:
-	if not is_instance_valid(_p): return
-	if is_instance_valid(elizabeth) and elizabeth.get_parent() == _p: 
-		_p.remove_child(elizabeth)
-	if is_instance_valid(michael) and michael.get_parent() == _p: 
-		_p.remove_child(michael)
+# --- UTILIDADES Y POSICIONAMIENTO ---
+func set_player_position(_new_pos: Vector2) -> void:
+	if is_instance_valid(player):
+		if player.get_parent() != get_tree().current_scene:
+			if player.get_parent(): player.get_parent().remove_child(player)
+			get_tree().current_scene.add_child(player)
+		
+		player.global_position = _new_pos
+		_activar_personaje(player)
+		player_spawned = true
+		reset_camera_on_player()
+
+func _activar_personaje(node: CharacterBody2D) -> void:
+	node.visible = true
+	node.process_mode = Node.PROCESS_MODE_INHERIT
+	var sm = node.get_node_or_null("StateMachine")
+	if sm: sm.process_mode = Node.PROCESS_MODE_INHERIT
+
+func _desactivar_personaje(node: CharacterBody2D) -> void:
+	node.visible = false
+	node.process_mode = Node.PROCESS_MODE_DISABLED
+
+func reset_camera_on_player(_duration: float = 0.0) -> void:
+	var camera : Camera2D = get_viewport().get_camera_2d()
+	if is_instance_valid(camera) and is_instance_valid(player):
+		if camera.get_parent(): camera.get_parent().remove_child(camera)
+		player.add_child(camera)
+		camera.position = Vector2.ZERO
+		camera.make_current()
+
+# --- FUNCIONES DE SOPORTE PARA OTROS SCRIPTS ---
+func set_as_parent(_p: Node2D) -> void:
+	if not is_instance_valid(_p) or not is_instance_valid(player): return
+	if player.get_parent(): player.get_parent().remove_child(player)
+	_p.add_child(player)
+
+func unparent_player(_p: Node2D) -> void:
+	if not is_instance_valid(_p) or not is_instance_valid(player): return
+	if player.get_parent() == _p: 
+		_p.remove_child(player)
+		add_child(player)
+
+func set_health(hp: int, max_hp: int) -> void:
+	if is_instance_valid(player):
+		player.max_hp = max_hp
+		player.hp = hp
+		if is_instance_valid(get_node_or_null("/root/PlayerHud")):
+			get_node("/root/PlayerHud").update_hp(hp, max_hp)
+
+func play_audio(_audio_stream: AudioStream) -> void:
+	if is_instance_valid(get_node_or_null("/root/PlayerHud")):
+		get_node("/root/PlayerHud").play_audio(_audio_stream)
 
 func force_player_reset() -> void:
 	if not is_instance_valid(player): return
@@ -91,46 +140,13 @@ func force_player_reset() -> void:
 			if "idle" in state.name.to_lower():
 				sm.change_state(state)
 				break
-	var anim = player.get_node_or_null("AnimationPlayer")
-	if anim:
-		if anim.has_animation("idle_down"): anim.play("idle_down")
-		anim.advance(0)
 
-# --- 4. GESTIÓN DE POSICIÓN Y ESCENA ---
-func set_player_position(_new_pos: Vector2) -> void:
-	if is_instance_valid(elizabeth) and is_instance_valid(michael):
-		elizabeth.global_position = _new_pos
-		michael.global_position = _new_pos
-		if is_instance_valid(player):
-			player.visible = true
-			player.process_mode = Node.PROCESS_MODE_INHERIT
-			player_spawned = true
-			reset_camera_on_player()
+func shake_camera(trauma: float = 1) -> void:
+	camera_shook.emit(clamp(trauma, 0, 3))
 
-func set_as_parent( _p : Node2D ) -> void:
-	if not is_instance_valid(_p): return
-	if is_instance_valid(elizabeth):
-		if elizabeth.get_parent(): elizabeth.get_parent().remove_child(elizabeth)
-		_p.add_child(elizabeth)
-	if is_instance_valid(michael):
-		if michael.get_parent(): michael.get_parent().remove_child(michael)
-		_p.add_child(michael)
-
-func reset_camera_on_player( _duration : float = 0.0 ) -> void:
-	var camera : Camera2D = get_viewport().get_camera_2d()
-	if is_instance_valid(camera) and is_instance_valid(player):
-		if camera.get_parent(): camera.get_parent().remove_child(camera)
-		player.add_child(camera)
-		camera.position = Vector2.ZERO
-		camera.make_current()
-
-# 5. SALUD Y UTILIDADES
-func set_health( hp: int, max_hp: int ) -> void:
-	if is_instance_valid(player):
-		player.max_hp = max_hp
-		player.hp = hp
-		if player == elizabeth and is_instance_valid(michael): michael.hp = hp
-		elif player == michael and is_instance_valid(elizabeth): elizabeth.hp = hp
-
-func shake_camera( trauma : float = 1 ) -> void:
-	camera_shook.emit( clampi( trauma, 0, 3 ) )
+func reward_xp(amount: int) -> void:
+	current_xp += amount
+	if current_level < level_requirements.size():
+		if current_xp >= level_requirements[current_level]:
+			current_level += 1
+			player_leveled_up.emit()

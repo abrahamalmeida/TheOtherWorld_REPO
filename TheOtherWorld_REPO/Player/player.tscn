@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://6je8bp3f2twi" path="res://Player/scripts/states/state_walk.gd" id="5_b2txu"]
 [ext_resource type="Texture2D" uid="uid://bqlto87dhifhn" path="res://Player/Sprites/spin_effect.png" id="6_5wwkf"]
 [ext_resource type="Script" uid="uid://brxt453p4en6r" path="res://Player/scripts/states/state_attack.gd" id="6_u4460"]
-[ext_resource type="AudioStream" uid="uid://djgew73osuei" path="res://Player/audio/SwordSwoosh.wav" id="8_7nq3f"]
+[ext_resource type="AudioStream" uid="uid://dqust8dpkjhlx" path="res://Player/audio/SwordSwoosh.wav" id="8_7nq3f"]
 [ext_resource type="Script" uid="uid://uqapv8bltas2" path="res://Player/scripts/player_interactions_host.gd" id="10_aivbr"]
 [ext_resource type="PackedScene" uid="uid://cpvl4rru3x52v" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="10_kupm1"]
 [ext_resource type="Script" uid="uid://balw8bf16tnb1" path="res://Player/scripts/states/state_stun.gd" id="11_1yhfb"]

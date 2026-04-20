@@ -150,6 +150,7 @@ grow_vertical = 2
 text = "creditos"
 
 [node name="SplashScene" parent="CanvasLayer" unique_id=855249785 instance=ExtResource("8_hlrge")]
+visible = false
 offset_left = -16.0
 offset_top = -21.0
 offset_right = 17.0

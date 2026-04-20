@@ -30,7 +30,7 @@ func _ready() -> void:
 
 
 func play() -> void:
-	var player : Player = PlayerManager.player
+	var player : CharacterBody2D = PlayerManager.player
 	var camera : Camera2D = get_viewport().get_camera_2d()
 	camera.process_mode = Node.PROCESS_MODE_ALWAYS
 	

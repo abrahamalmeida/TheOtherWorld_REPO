@@ -1,11 +1,11 @@
 class_name PlayerAbilities extends Node
 
-# Rutas corregidas
+# Rutas
 const BOOMERANG = preload("res://Player/boomerang.tscn")
 const STONE_PROJECTILE = preload("res://Interactables/arrow/arrow.tscn") 
 
 var abilities : Array[ String ] = [
-	"", "", "", "" # BOOMERANG, (VACÍO), SLINGSHOT, (VACÍO)
+	"", "", "", "" 
 ]
 
 var selected_ability : int = 0
@@ -49,8 +49,6 @@ func toggle_ability() -> void:
 	PlayerHud.update_ability_ui( selected_ability )
 
 func boomerang_ability() -> void:
-	# FIX: Usamos is_instance_valid para que si el boomerang se destruyó 
-	# mientras el juego estaba pausado/dialogando, no bloquee el siguiente tiro.
 	if is_instance_valid(boomerang_instance):
 		return
 	
@@ -73,24 +71,15 @@ func slingshot_ability() -> void:
 	if p.arrow_count <= 0:
 		return
 	
-	# FIX: Si el estado se quedó "pegado" por el diálogo, forzamos que si estamos
-	# en Idle o Walk (que es donde el reset nos manda), el estado cambie sí o sí.
 	if state_machine.current_state == idle or state_machine.current_state == walk:
 		p.arrow_count -= 1
 		PlayerHud.update_arrow_count( p.arrow_count )
 		state_machine.change_state( bow )
 
-# --- LÓGICA DE LIMPIEZA PARA EL PLAYER MANAGER ---
-
-# Esta función la llamará el PlayerManager.force_player_reset()
 func clean_abilities() -> void:
-	# Si el boomerang está volando y se bugeó, lo eliminamos
 	if is_instance_valid(boomerang_instance):
 		boomerang_instance.queue_free()
 	boomerang_instance = null
-	print("Habilidades reseteadas y desbloqueadas.")
-
-# --- LÓGICA DE CARGA ---
 
 func _on_game_loaded() -> void:
 	var new_abilities = SaveManager.current_save.abilities
