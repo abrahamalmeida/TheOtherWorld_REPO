@@ -9,15 +9,14 @@ signal camera_shook( trauma : float )
 signal interact_pressed
 signal player_leveled_up
 
-# 2. VARIABLES DE ESTADO Y PROGRESIÓN
+# 2. VARIABLES
 var elizabeth : Player
 var michael : CharacterBody2D
 var player : CharacterBody2D 
 var player_spawned : bool = false
 
-# Lógica de la Placa y Cambio
-var puede_cambiar_a_michael : bool = false # Se activa con la placa
-var ya_cambio_una_vez : bool = false       # Bloquea el regreso
+# Un solo candado interno para que no se dispare dos veces si pisas raro
+var ya_viajamos : bool = false       
 
 var current_xp : int = 0
 var current_level : int = 1
@@ -33,42 +32,52 @@ func _ready() -> void:
 	
 	_desactivar_personaje(elizabeth)
 	_desactivar_personaje(michael)
+	ya_viajamos = false
 
-# --- SISTEMA DE INPUT (C e H) ---
+# --- SISTEMA DE INPUT (SOLO LA C) ---
 func _unhandled_input(event: InputEvent) -> void:
 	# Interacción (Tecla C)
 	if event.is_action_pressed("interact"):
 		interact()
+	# ADIÓS A LA TECLA H. YA NO EXISTE AQUÍ.
 
-	# Cambio a Michael (Tecla H)
-	if event.is_action_pressed("cambiar_personaje"):
-		if puede_cambiar_a_michael and not ya_cambio_una_vez:
-			ya_cambio_una_vez = true 
-			viaje_unico_a_michael()
-		else:
-			if ya_cambio_una_vez:
-				print("Ya eres Michael, no hay vuelta atrás.")
-			else:
-				print("La placa no ha sido activada.")
-
+# --- EL VIAJE AUTOMÁTICO ---
 func viaje_unico_a_michael() -> void:
-	# Sacamos a Elizabeth del mapa
+	# Si ya viajamos, ignoramos cualquier otra llamada
+	if ya_viajamos: return
+	ya_viajamos = true 
+
 	if elizabeth.get_parent() and elizabeth.get_parent() != self:
 		elizabeth.get_parent().remove_child(elizabeth)
 		add_child(elizabeth)
 	_desactivar_personaje(elizabeth)
 
-	# El jefe ahora es Michael
 	player = michael
-	
 	var path_escena : String = "res://Levels/Dungeon01/02.tscn"
 	var lm = get_node_or_null("/root/GlobalLevelManager")
 	if not lm: lm = get_node_or_null("/root/LevelManager")
 	
 	if lm:
-		# AJUSTA ESTO: Pon la posición X, Y donde debe aparecer Michael en la Dungeon
-		var spawn_dungeon = Vector2(200, 200) 
-		lm.load_new_level(path_escena, "", Vector2.ZERO, spawn_dungeon)
+		# Coordenada de aparición
+		var spawn_pos = Vector2(250, 250) 
+		lm.load_new_level(path_escena, "", Vector2.ZERO, spawn_pos)
+
+# --- TODAS LAS FUNCIONES VITALES (INTACTAS) ---
+
+func unparent_player(_p: Node2D) -> void:
+	if not is_instance_valid(_p) or not is_instance_valid(player): return
+	if player.get_parent() == _p: 
+		_p.remove_child(player)
+		add_child(player)
+
+func force_player_reset() -> void:
+	if not is_instance_valid(player): return
+	var sm = player.get_node_or_null("StateMachine")
+	if sm:
+		for state in sm.get_children():
+			if "idle" in state.name.to_lower():
+				sm.change_state(state)
+				break
 
 func interact() -> void:
 	if is_instance_valid(player):
@@ -79,7 +88,6 @@ func interact() -> void:
 		else:
 			interact_pressed.emit()
 
-# --- UTILIDADES Y POSICIONAMIENTO ---
 func set_player_position(_new_pos: Vector2) -> void:
 	if is_instance_valid(player):
 		if player.get_parent() != get_tree().current_scene:
@@ -101,25 +109,10 @@ func _desactivar_personaje(node: CharacterBody2D) -> void:
 	node.visible = false
 	node.process_mode = Node.PROCESS_MODE_DISABLED
 
-func reset_camera_on_player(_duration: float = 0.0) -> void:
-	var camera : Camera2D = get_viewport().get_camera_2d()
-	if is_instance_valid(camera) and is_instance_valid(player):
-		if camera.get_parent(): camera.get_parent().remove_child(camera)
-		player.add_child(camera)
-		camera.position = Vector2.ZERO
-		camera.make_current()
-
-# --- FUNCIONES DE SOPORTE PARA OTROS SCRIPTS ---
 func set_as_parent(_p: Node2D) -> void:
 	if not is_instance_valid(_p) or not is_instance_valid(player): return
 	if player.get_parent(): player.get_parent().remove_child(player)
 	_p.add_child(player)
-
-func unparent_player(_p: Node2D) -> void:
-	if not is_instance_valid(_p) or not is_instance_valid(player): return
-	if player.get_parent() == _p: 
-		_p.remove_child(player)
-		add_child(player)
 
 func set_health(hp: int, max_hp: int) -> void:
 	if is_instance_valid(player):
@@ -132,14 +125,13 @@ func play_audio(_audio_stream: AudioStream) -> void:
 	if is_instance_valid(get_node_or_null("/root/PlayerHud")):
 		get_node("/root/PlayerHud").play_audio(_audio_stream)
 
-func force_player_reset() -> void:
-	if not is_instance_valid(player): return
-	var sm = player.get_node_or_null("StateMachine")
-	if sm:
-		for state in sm.get_children():
-			if "idle" in state.name.to_lower():
-				sm.change_state(state)
-				break
+func reset_camera_on_player(_duration: float = 0.0) -> void:
+	var camera : Camera2D = get_viewport().get_camera_2d()
+	if is_instance_valid(camera) and is_instance_valid(player):
+		if camera.get_parent(): camera.get_parent().remove_child(camera)
+		player.add_child(camera)
+		camera.position = Vector2.ZERO
+		camera.make_current()
 
 func shake_camera(trauma: float = 1) -> void:
 	camera_shook.emit(clamp(trauma, 0, 3))

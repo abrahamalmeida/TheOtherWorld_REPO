@@ -1,21 +1,19 @@
 [gd_scene format=4 uid="uid://fxcoynik8gug"]
 
 [ext_resource type="Script" uid="uid://d2eyblbal755o" path="res://Levels/scripts/level.gd" id="1_p8h4r"]
-[ext_resource type="AudioStream" uid="uid://bss1hbkoufxql" path="res://Levels/music/example_music_03.ogg" id="2_sa7q0"]
 [ext_resource type="PackedScene" uid="uid://bcskysr5no5a6" path="res://Tile Maps/dungeon_tiles_01.tscn" id="3_bpaqg"]
 [ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="3_sp6rm"]
 [ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="4_bwwsp"]
-[ext_resource type="PackedScene" uid="uid://dun2fbsf41obt" path="res://Enemies/goblin/cientifoco.tscn" id="4_gmq4b"]
+[ext_resource type="PackedScene" uid="uid://b4ki4j1o0157r" path="res://goblin_cientifico.tscn" id="5_54q72"]
 [ext_resource type="PackedScene" uid="uid://ch2oxh3rsa2fr" path="res://Interactables/dungeon/pressure_plate.tscn" id="5_hd3kv"]
 [ext_resource type="PackedScene" uid="uid://da4qq8gb0idce" path="res://Interactables/dungeon/barred_door.tscn" id="6_ffenb"]
 [ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="6_ndegm"]
 [ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="6_rsdf3"]
-[ext_resource type="PackedScene" uid="uid://b4jqibhvnwmda" path="res://Interactables/dungeon/pushable_statue.tscn" id="7_6thod"]
 [ext_resource type="Resource" uid="uid://cvnr3a38pmudn" path="res://quests/recover_lost_flute.tres" id="7_cweoc"]
+[ext_resource type="PackedScene" uid="uid://b63km2avcjbgb" path="res://GeneralNodes/EnemyCounter/enemy_counter.tscn" id="11_gmq4b"]
 
 [node name="01" type="Node2D" unique_id=840091066]
 script = ExtResource("1_p8h4r")
-music = ExtResource("2_sa7q0")
 
 [node name="Dungeon Tiles 01" parent="." unique_id=1656751676 instance=ExtResource("3_bpaqg")]
 tile_map_data = PackedByteArray("AAAAAP//AQAJAAAAAAAAAAAAAQAJAAEAAAAAAAEAAQAJAAIAAAAAAAIAAQAJAAMAAAAAAAMAAQAJAAMAAAAAAAQAAQAJAAMAAAAAAAUAAQAJAAMAAAAAAAYAAQAJAAQAAAAAAAcAAQAJAAUAAAAAAAgAAQAJAAYAAAABAP//AQAKAAAAAAABAAAAAAABAAEAAAABAAEAAAABAAIAAAABAAIAAAABAAMAAAABAAMAAAABAAQAAAABAAQAAAABAAMAAAABAAUAAAABAAQAAAABAAYAAAABAAUAAAABAAcAAAABAAYAAAABAAgAAQAKAAYAAAACAP//AQALAAAAAAACAAAAAAACAAEAAAACAAEAAAACAAIAAAACAAIAAAACAAMAAAACAAMAAAACAAQAAAACAAQAAAACAAMAAAACAAUAAAACAAQAAAACAAYAAAACAAUAAAACAAcAAAACAAYAAAACAAgAAQALAAYAAAADAP//AQAMAAAAAAADAAAAAAADAAEAAAADAAEAAAADAAIAAAADAAIAAAADAAMAAAADAAMAAAADAAQAAAADAAQAAAADAAMAAAADAAUAAAADAAQAAAADAAYAAAADAAUAAAADAAcAAAADAAYAAAADAAgAAQAMAAYAAAAEAP//AQALAAAAAAAEAAAAAAAEAAEAAAAEAAEAAAAEAAIAAAAEAAIAAAAEAAMAAAAEAAMAAAAEAAQAAAAEAAQAAAAEAAMAAAAEAAUAAAAEAAQAAAAEAAYAAAADAAUAAAAEAAcAAAADAAYAAAAEAAgAAQAAAAcAAAAFAP//AQAMAAAAAAAFAAAAAAAFAAEAAAAFAAEAAAAFAAIAAAAFAAIAAAAFAAMAAAAFAAMAAAAFAAQAAAAFAAQAAAAFAAMAAAAFAAUAAAAFAAQAAAAFAAYAAAAEAAUAAAAFAAcAAAAEAAYAAAAFAAgAAQADAAcAAAAGAP//AQANAAAAAAAGAAAAAAADAAEAAAAGAAEAAAADAAIAAAAGAAIAAAADAAMAAAAGAAMAAAADAAQAAAAGAAQAAAADAAMAAAAGAAUAAAADAAQAAAAGAAYAAAAFAAUAAAAGAAcAAAAFAAYAAAAGAAgAAQAAAAcAAAAHAP//AQALAAAAAAAHAAAAAAAEAAEAAAAHAAEAAAAEAAIAAAAHAAIAAAAEAAMAAAAHAAMAAAAEAAQAAAAHAAQAAAAEAAMAAAAHAAUAAAAEAAQAAAAHAAYAAQABAAUAAAAHAAcAAQABAAYAAAAHAAgAAQABAAcAAAAIAP//AQAMAAAAAAAIAAAAAAAFAAEAAAAIAAEAAAAFAAIAAAAIAAIAAAAFAAMAAAAIAAMAAAAFAAQAAAAIAAQAAAAFAAMAAAAIAAUAAAAFAAQAAAAIAAYAAQACAAUAAAAIAAcAAQACAAYAAAAIAAgAAQACAAcAAAAJAP//AQANAAAAAAAJAAAAAAADAAEAAAAJAAEAAAADAAIAAAAJAAIAAAADAAMAAAAJAAMAAAADAAQAAAAJAAQAAAADAAMAAAAJAAUAAAADAAQAAAAJAAYAAAAFAAUAAAAJAAcAAAAFAAYAAAAJAAgAAQADAAcAAAAKAP//AQALAAAAAAAKAAAAAAAEAAEAAAAKAAEAAAAEAAIAAAAKAAIAAAAEAAMAAAAKAAMAAAAEAAQAAAAKAAQAAAAEAAMAAAAKAAUAAAAEAAQAAAAKAAYAAAADAAUAAAAKAAcAAAADAAYAAAAKAAgAAQAAAAcAAAALAP//AQAFAAUAAAALAAAAAQAFAAYAAAALAAEAAQAFAAcAAAALAAIAAAAFAAMAAAALAAMAAAAFAAQAAAALAAQAAAAFAAMAAAALAAUAAAAFAAQAAAALAAYAAAAEAAUAAAALAAcAAAAEAAYAAAALAAgAAQADAAcAAAAMAP//AQAGAAUAAAAMAAAAAQAGAAYAAAAMAAEAAQAGAAcAAAAMAAIAAAADAAMAAAAMAAMAAAADAAQAAAAMAAQAAAADAAMAAAAMAAUAAAAFAAQAAAAMAAYAAAAFAAUAAAAMAAcAAAAFAAYAAAAMAAgAAQAMAAYAAAANAP//AQANAAAAAAANAAAAAAAGAAEAAAANAAEAAAAGAAIAAAANAAIAAAAGAAMAAAANAAMAAAAGAAQAAAANAAQAAAAGAAMAAAANAAUAAAAGAAQAAAANAAYAAAAGAAUAAAANAAcAAAAGAAYAAAANAAgAAQANAAYAAAAOAP//AQAOAAAAAAAOAAAAAAAHAAEAAAAOAAEAAAAHAAIAAAAOAAIAAAAHAAMAAAAOAAMAAAAHAAQAAAAOAAQAAAAHAAMAAAAOAAUAAAAHAAQAAAAOAAYAAAAHAAUAAAAOAAcAAAAHAAYAAAAOAAgAAQAOAAYAAAAPAP//AQAPAAAAAAAPAAAAAQAPAAEAAAAPAAEAAQAPAAIAAAAPAAIAAQAPAAMAAAAPAAMAAQAPAAMAAAAPAAQAAQAPAAMAAAAPAAUAAQAPAAMAAAAPAAYAAQAPAAQAAAAPAAcAAQAPAAUAAAAPAAgAAQAPAAYAAAA=")
@@ -26,14 +24,8 @@ tile_map_data = PackedByteArray("AAADAAAAAgABAAgAAAADAAEAAgABAAkAAAAEAAAAAgACAAg
 [node name="Dungeon Tiles 03" parent="." unique_id=606015112 instance=ExtResource("3_bpaqg")]
 tile_map_data = PackedByteArray("AAADAAMAAgAEAAcAAAADAAQAAgAEAAcAAAAGAAEAAgAEAAcAAAAEAAEAAgAEAAcAAAAEAAQAAgAFAAYAAAAEAAUAAgAFAAcAAAAIAAEAAgAPAAAAAAA=")
 
-[node name="Goblin" parent="." unique_id=1416626959 instance=ExtResource("4_gmq4b")]
-position = Vector2(262, 88)
-
-[node name="Goblin2" parent="." unique_id=1803239602 instance=ExtResource("4_gmq4b")]
-position = Vector2(143, 91)
-
 [node name="PlayerSpawn" parent="." unique_id=1681734453 instance=ExtResource("3_sp6rm")]
-position = Vector2(209, 128)
+position = Vector2(225, 135)
 
 [node name="LevelTransition" parent="." unique_id=1707882704 instance=ExtResource("4_bwwsp")]
 position = Vector2(256, 205)
@@ -61,21 +53,19 @@ Quest: Recover Lost Magical Flute
 Step: 1 - find the cave entrance
 Complete: false"
 
-[node name="LevelTransition2" parent="." unique_id=721879274 instance=ExtResource("4_bwwsp")]
-position = Vector2(377, 61)
-level = "res://Levels/Dungeon01/02.tscn"
-side = 2
-
 [node name="PressurePlate" parent="." unique_id=1411344218 instance=ExtResource("5_hd3kv")]
-position = Vector2(192, 112)
+position = Vector2(258, 117)
 
 [node name="BarredDoor" parent="." unique_id=495622687 instance=ExtResource("6_ffenb")]
 position = Vector2(348, 57)
 
-[node name="PushableStatue" parent="." unique_id=2042596388 instance=ExtResource("7_6thod")]
-position = Vector2(320, 113)
-persistent = true
-persistent_location = Vector2(191, 114)
+[node name="EnemyCounter" parent="." unique_id=1438135403 instance=ExtResource("11_gmq4b")]
+
+[node name="Goblin" parent="EnemyCounter" unique_id=962891935 instance=ExtResource("5_54q72")]
+position = Vector2(388, 104)
+
+[node name="Goblin2" parent="EnemyCounter" unique_id=1071589499 instance=ExtResource("5_54q72")]
+position = Vector2(171, 95)
 
 [connection signal="entered_from_here" from="LevelTransition" to="LevelTransition/QuestActivatedSwitch/QuestAdvanceTrigger" method="advance_quest"]
 [connection signal="activated" from="PressurePlate" to="BarredDoor" method="open_door"]

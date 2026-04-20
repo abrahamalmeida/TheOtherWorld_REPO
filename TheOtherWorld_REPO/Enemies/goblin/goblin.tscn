@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bxnynmne8hsl2"]
+[gd_scene load_steps=43 format=3 uid="uid://bxnynmne8hsl2"]
 
 [ext_resource type="Script" uid="uid://bm01dty876pk3" path="res://Enemies/Scripts/enemy.gd" id="1_3l85o"]
 [ext_resource type="PackedScene" uid="uid://cpvl4rru3x52v" path="res://GeneralNodes/HurtBox/hurt_box.tscn" id="2_vb6ko"]
@@ -662,12 +662,16 @@ _data = {
 [sub_resource type="Resource" id="Resource_qq6r0"]
 script = ExtResource("14_jdd1u")
 item = ExtResource("13_gq3d7")
+probability = 100.0
+min_amount = 1
 max_amount = 4
 
 [sub_resource type="Resource" id="Resource_g8f5j"]
 script = ExtResource("14_jdd1u")
 item = ExtResource("15_bpneo")
 probability = 33.0
+min_amount = 1
+max_amount = 1
 
 [sub_resource type="Animation" id="Animation_vruw5"]
 length = 0.001
@@ -730,100 +734,104 @@ _data = {
 &"destroy": SubResource("Animation_uy6og")
 }
 
-[node name="Goblin" type="CharacterBody2D" unique_id=1071589499]
+[node name="Goblin" type="CharacterBody2D"]
 collision_layer = 256
 collision_mask = 16
 script = ExtResource("1_3l85o")
 
-[node name="HurtBox" parent="." unique_id=629709853 instance=ExtResource("2_vb6ko")]
+[node name="HurtBox" parent="." instance=ExtResource("2_vb6ko")]
 position = Vector2(0, -7)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1621942298]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_mc85u")
 debug_color = Color(0.94902, 0.768627, 0, 0.419608)
 
-[node name="HitBox" parent="." unique_id=1744783534 instance=ExtResource("3_uacx4")]
+[node name="HitBox" parent="." instance=ExtResource("3_uacx4")]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox" unique_id=304757746]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_mc85u")
 debug_color = Color(0.94902, 0.0392157, 0, 0.419608)
 
-[node name="ShadowSprite2D" type="Sprite2D" parent="." unique_id=69841123]
+[node name="ShadowSprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.588235)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_fb3j6")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=411845771]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -14)
 texture = ExtResource("5_ehmqu")
 hframes = 8
 vframes = 3
 
-[node name="AttackHurtBox" parent="Sprite2D" unique_id=1898641698 instance=ExtResource("2_vb6ko")]
+[node name="AttackHurtBox" parent="Sprite2D" instance=ExtResource("2_vb6ko")]
 visible = false
 position = Vector2(0, 11)
 monitoring = false
 damage = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/AttackHurtBox" unique_id=598157551]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/AttackHurtBox"]
 shape = SubResource("CircleShape2D_mc85u")
 debug_color = Color(0.94902, 0.768627, 0, 0.419608)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=451104678]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_vs0d0")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=339863366]
-libraries/ = SubResource("AnimationLibrary_dovdx")
-autoplay = &"idle_down"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dovdx")
+}
+autoplay = "idle_down"
 
-[node name="EnemyStateMachine" type="Node" parent="." unique_id=1819211795]
+[node name="EnemyStateMachine" type="Node" parent="."]
 script = ExtResource("8_fxyh2")
 
-[node name="Idle" type="Node" parent="EnemyStateMachine" unique_id=241664342 node_paths=PackedStringArray("after_idle_state")]
+[node name="Idle" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("after_idle_state")]
 script = ExtResource("9_ldfnm")
 after_idle_state = NodePath("../Wander")
 
-[node name="Wander" type="Node" parent="EnemyStateMachine" unique_id=446708944 node_paths=PackedStringArray("next_state")]
+[node name="Wander" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("10_tqetg")
 wander_speed = 30.0
 state_animation_duration = 0.7
 next_state = NodePath("../Idle")
 
-[node name="Stun" type="Node" parent="EnemyStateMachine" unique_id=1530044792 node_paths=PackedStringArray("next_state")]
+[node name="Stun" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("next_state")]
 script = ExtResource("11_i8xm0")
 decelerate_speed = 5.0
 next_state = NodePath("../Chase")
 
-[node name="Destroy" type="Node" parent="EnemyStateMachine" unique_id=110659588]
+[node name="Destroy" type="Node" parent="EnemyStateMachine"]
 script = ExtResource("12_ke2eo")
 decelerate_speed = 5.0
 drops = Array[ExtResource("14_jdd1u")]([SubResource("Resource_qq6r0"), SubResource("Resource_g8f5j")])
 
-[node name="Chase" type="Node" parent="EnemyStateMachine" unique_id=2125907501 node_paths=PackedStringArray("vision_area", "attack_area", "next_state")]
+[node name="Chase" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("vision_area", "attack_area", "next_state")]
 script = ExtResource("16_v3mb8")
 vision_area = NodePath("../../VisionArea")
 attack_area = NodePath("../../Sprite2D/AttackHurtBox")
 state_aggro_duration = 5.0
 next_state = NodePath("../Idle")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=85811288]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 max_polyphony = 4
 bus = &"SFX"
 
-[node name="DestroyEffectSprite" type="Sprite2D" parent="." unique_id=1409996498]
+[node name="DestroyEffectSprite" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -9)
 texture = ExtResource("16_qmi8b")
 hframes = 6
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DestroyEffectSprite" unique_id=1668367712]
-libraries/ = SubResource("AnimationLibrary_w2pak")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DestroyEffectSprite"]
+libraries = {
+&"": SubResource("AnimationLibrary_w2pak")
+}
 
-[node name="VisionArea" parent="." unique_id=422714398 instance=ExtResource("17_ti8pv")]
+[node name="VisionArea" parent="." instance=ExtResource("17_ti8pv")]
 visible = false
 position = Vector2(0, -7)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea" unique_id=1352284143]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea"]
 polygon = PackedVector2Array(-16, 0, 16, 0, 128, 128, -128, 128)
