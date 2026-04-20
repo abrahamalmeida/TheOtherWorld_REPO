@@ -1,7 +1,7 @@
 extends Node2D
 
 const INTRO_STORY_SCENE : String = "res://historia_inicial.tscn" 
-const CREDITS_SCENE : String = "res://creditos.tscn"
+const CREDITS_SCENE : String = "res://Creditos.tscn"
 
 @export var music : AudioStream
 @export var button_focus_audio : AudioStream

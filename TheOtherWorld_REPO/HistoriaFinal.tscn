@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://fkrpnjwqh5qi"]
+
+[ext_resource type="Script" uid="uid://wsemvne0lj8e" path="res://historia_final.gd" id="1_itqne"]
+
+[node name="HistoriaInicial" type="CanvasLayer" unique_id=1059665166]
+process_mode = 3
+layer = 2
+script = ExtResource("1_itqne")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=439417071]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=2015662051]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 36.0
+offset_right = 438.0
+offset_bottom = 708.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+text = "
+ [center]
+[color=yellow]¡GANASTE![/color]
+
+Tras una batalla que sacudió los cimientos de ambos mundos,
+el silencio volvió a reinar en el calabozo.
+
+Elizabeth, agotada pero firme, sostuvo el cristal de dualidad.
+Michael sintió cómo la gravedad del mundo real 
+comenzaba a reclamar su esencia.
+
+\"Lo logramos\", susurró Elizabeth.
+
+Con un destello cegador, la brecha se cerró.
+Michael abrió los ojos y sintió, por primera vez en mucho tiempo,
+el aire fresco de la superficie y el calor del sol.
+
+[color=cyan]Michael ha vuelto al mundo real.[/color]
+
+La conexión entre los dos mundos permanece latente,
+pero por ahora, los guerreros pueden descansar.
+
+La aventura de Elizabeth y Michael ha llegado a su fin...
+¿O es solo el comienzo de una nueva aventura?
+
+[b]FIN[/b]
+[/center]
+"
+scroll_active = false
+visible_characters = 0
+visible_ratio = 0.0

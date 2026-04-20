@@ -200,7 +200,7 @@ func open_dungeon() -> void:
 		door_block.enabled = false
 	
 	# SALIDA SEGURA: Esperamos al final del frame para no romper el GlobalPlayerManager
-	get_tree().call_deferred("change_scene_to_file", "res://title_scene/title_scene.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://HistoriaFinal.tscn")
 
 func enable_hit_boxes( _v : bool = true ) -> void:
 	if is_instance_valid(hit_box): hit_box.set_deferred( "monitorable", _v )

@@ -1,34 +1,53 @@
 [gd_scene format=3 uid="uid://b38nwfdaimejn"]
 
-[ext_resource type="Script" uid="uid://rrxry86rmwnp" path="res://creditos.gd" id="1_ilafw"]
+[ext_resource type="Script" uid="uid://rrxry86rmwnp" path="res://creditos.gd" id="1_xau7l"]
 
-[node name="Crontrol" type="Control" unique_id=786361680]
-layout_mode = 3
-anchors_preset = 0
-script = ExtResource("1_ilafw")
+[node name="HistoriaInicial" type="CanvasLayer" unique_id=1059665166]
+process_mode = 3
+layer = 2
+script = ExtResource("1_xau7l")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1827059164]
-layout_mode = 0
+[node name="ColorRect" type="ColorRect" parent="." unique_id=439417071]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 1.0
-offset_top = -1.0
-offset_right = 483.0
-offset_bottom = 272.0
-color = Color(0, 0, 0, 1)
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.012617188, 0.012617188, 0.012617188, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1997165048]
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect" unique_id=2015662051]
 layout_mode = 0
-offset_left = 40.0
-offset_right = 463.0
-offset_bottom = 259.0
+offset_left = 33.0
+offset_top = 36.0
+offset_right = 438.0
+offset_bottom = 585.0
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+bbcode_enabled = true
+text = "[center]
+[b]CRÉDITOS[/b]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=956492260]
-layout_mode = 2
-alignment = 1
+[i]Creadores[/i]
+Maria Bermudez
+Abraham Almeida
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=738856374]
-layout_mode = 2
-text = "Creditos"
+[i]Agradecimientos Especiales[/i]
+Manuel Cabello
+Universidad Rafael Urdaneta (URU)
 
-[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer" unique_id=1376438191]
-layout_mode = 2
-text = "uhhu"
+[i]Recursos y Tutoriales[/i]
+Michael Games
+(Sprites y lógica de programación)
+
+[i]Banda Sonora[/i]
+\"Running Up That Hill\" - Kate Bush
+(Stranger Things Max's Theme)
+\"The NeverEnding Story\"
+(Stranger Things Version)
+
+[b]GRACIAS POR JUGAR[/b]
+[/center]"
+scroll_active = false
+visible_characters = 0
+visible_ratio = 0.0

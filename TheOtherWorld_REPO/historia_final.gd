@@ -110,7 +110,7 @@ func saltar_a_nivel() -> void:
 	PlayerManager.force_player_reset()
 	
 	# Cambio de nivel diferido para que la Victus no sufra
-	LevelManager.load_new_level("res://title_scene/title_scene.tscn", "", Vector2.ZERO)
+	LevelManager.load_new_level("res://Creditos.tscn", "", Vector2.ZERO)
 	
 	# Eliminamos la intro de la memoria
 	queue_free()

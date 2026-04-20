@@ -79,17 +79,26 @@ func _unhandled_input(event: InputEvent) -> void:
 		interact()
 
 func viaje_unico_a_michael() -> void:
-	if ya_viajamos: return
-	ya_viajamos = true 
+	# Esta línea DEBE tener un Tab al principio
+	if ya_viajamos:
+		return
+	
+	ya_viajamos = true
+	
+	# Todas estas líneas también llevan un Tab
 	_check_and_instantiate_players()
-	_desactivar_personaje(elizabeth)
+	
+	if is_instance_valid(elizabeth):
+		_desactivar_personaje(elizabeth)
 	
 	var path_escena : String = "res://Levels/Dungeon01/02.tscn"
-	var lm = get_node_or_null("/root/GlobalLevelManager") or get_node_or_null("/root/LevelManager")
 	
-	if lm:
-		var spawn_pos = Vector2(250, 250) 
-		lm.load_new_level(path_escena, "", Vector2.ZERO, spawn_pos)
+	if is_instance_valid(LevelManager):
+		var spawn_pos = Vector2(250, 250)
+		LevelManager.load_new_level(path_escena, "", Vector2.ZERO, spawn_pos)
+	else:
+		# Fallback por si el Autoload falla
+		get_tree().change_scene_to_file(path_escena)
 
 func set_player_position(_new_pos: Vector2) -> void:
 	if player == null: return
