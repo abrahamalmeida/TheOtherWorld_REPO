@@ -19,7 +19,7 @@
 [ext_resource type="Resource" uid="uid://bc035w7hy8e2o" path="res://Items/magical_flute.tres" id="16_sf2tf"]
 [ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="17_ngji5"]
 [ext_resource type="Resource" uid="uid://cvnr3a38pmudn" path="res://quests/recover_lost_flute.tres" id="18_4t3f6"]
-[ext_resource type="PackedScene" path="res://goblin_esqueleto.tscn" id="20_4gqtb"]
+[ext_resource type="PackedScene" uid="uid://2cd7gjm7n6in" path="res://goblin_esqueleto.tscn" id="20_4gqtb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8q12o"]
 texture = ExtResource("3_4nqfk")
@@ -1032,14 +1032,12 @@ flip_h = true
 hframes = 16
 
 [node name="Hand01_UP" type="Sprite2D" parent="DarkWizardBoss/BossNode/CloakSprite" unique_id=2138098311]
-visible = false
 show_behind_parent = true
 position = Vector2(20, 4)
 texture = ExtResource("7_1pesq")
 hframes = 16
 
 [node name="Hand02_UP" type="Sprite2D" parent="DarkWizardBoss/BossNode/CloakSprite" unique_id=1147248463]
-visible = false
 show_behind_parent = true
 position = Vector2(-20, 4)
 texture = ExtResource("7_1pesq")
@@ -1047,7 +1045,6 @@ flip_h = true
 hframes = 16
 
 [node name="Hand01_SIDE" type="Sprite2D" parent="DarkWizardBoss/BossNode/CloakSprite" unique_id=868603992]
-visible = false
 show_behind_parent = true
 position = Vector2(20, 4)
 texture = ExtResource("7_1pesq")
@@ -1055,7 +1052,6 @@ offset = Vector2(-12, -4)
 hframes = 16
 
 [node name="Hand02_SIDE" type="Sprite2D" parent="DarkWizardBoss/BossNode/CloakSprite" unique_id=78884607]
-visible = false
 position = Vector2(-20, 4)
 texture = ExtResource("7_1pesq")
 offset = Vector2(20, 4)
@@ -1107,7 +1103,7 @@ position = Vector2(157, 191)
 rotation = 1.5708
 
 [node name="EB_V2" parent="DarkWizardBoss/BeamAttacks" unique_id=309994066 instance=ExtResource("7_0qxml")]
-position = Vector2(257, 191)
+position = Vector2(258, 192)
 rotation = 1.5708
 
 [node name="EB_V3" parent="DarkWizardBoss/BeamAttacks" unique_id=295985351 instance=ExtResource("7_0qxml")]
@@ -1151,3 +1147,4 @@ position = Vector2(135, 226)
 
 [node name="Goblin2" parent="." unique_id=1199236125 instance=ExtResource("20_4gqtb")]
 position = Vector2(331, 239)
+script = null
