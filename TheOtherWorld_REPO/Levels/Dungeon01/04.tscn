@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://bc035w7hy8e2o" path="res://Items/magical_flute.tres" id="16_sf2tf"]
 [ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="17_ngji5"]
 [ext_resource type="Resource" uid="uid://cvnr3a38pmudn" path="res://quests/recover_lost_flute.tres" id="18_4t3f6"]
+[ext_resource type="PackedScene" path="res://goblin_esqueleto.tscn" id="20_4gqtb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8q12o"]
 texture = ExtResource("3_4nqfk")
@@ -1144,3 +1145,9 @@ settings_summary = "UPDATE QUEST:
 Quest: Recover Lost Magical Flute
 Step: 2 - find the magical flute
 Complete: false"
+
+[node name="Goblin" parent="." unique_id=1071589499 instance=ExtResource("20_4gqtb")]
+position = Vector2(135, 226)
+
+[node name="Goblin2" parent="." unique_id=1199236125 instance=ExtResource("20_4gqtb")]
+position = Vector2(331, 239)
