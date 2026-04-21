@@ -22,10 +22,17 @@ func _ready() -> void:
 	
 	setup_abilities()
 	SaveManager.game_loaded.connect( _on_game_loaded )
-	PlayerManager.INVENTORY_DATA.ability_acquired.connect( _on_ability_acquired )
+	
+	# Cambiado a PlayerManager para consistencia
+	if PlayerManager.INVENTORY_DATA:
+		PlayerManager.INVENTORY_DATA.ability_acquired.connect( _on_ability_acquired )
 
 func setup_abilities( select_index : int = 0 ) -> void:
-	PauseMenu.update_ability_items( abilities )
+	# --- CORRECCIÓN CLAVE ---
+	if PlayerManager.pause_menu_instance:
+		if PlayerManager.pause_menu_instance.has_method("update_ability_items"):
+			PlayerManager.pause_menu_instance.update_ability_items( abilities )
+	
 	PlayerHud.update_ability_items( abilities )
 	selected_ability = select_index - 1
 	toggle_ability()
@@ -53,8 +60,9 @@ func boomerang_ability() -> void:
 		return
 	
 	var p = PlayerManager.player
-	var _b = BOOMERANG.instantiate() as Boomerang
+	if p == null: return
 	
+	var _b = BOOMERANG.instantiate() as Boomerang
 	p.add_sibling( _b )
 	_b.global_position = p.global_position
 	
@@ -67,6 +75,7 @@ func boomerang_ability() -> void:
 
 func slingshot_ability() -> void:
 	var p = PlayerManager.player
+	if p == null: return
 	
 	if p.arrow_count <= 0:
 		return
@@ -82,14 +91,15 @@ func clean_abilities() -> void:
 	boomerang_instance = null
 
 func _on_game_loaded() -> void:
-	var new_abilities = SaveManager.current_save.abilities
-	abilities.clear()
-	for i in new_abilities:
-		if i == "GRAPPLE" or i == "BOMB":
-			abilities.append("")
-		else:
-			abilities.append( i )
-	setup_abilities()
+	if SaveManager.current_save:
+		var new_abilities = SaveManager.current_save.abilities
+		abilities.clear()
+		for i in new_abilities:
+			if i == "GRAPPLE" or i == "BOMB":
+				abilities.append("")
+			else:
+				abilities.append( i )
+		setup_abilities()
 
 func _on_ability_acquired( _ability : AbilityItemData ) -> void:
 	match _ability.type:

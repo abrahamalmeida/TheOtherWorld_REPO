@@ -8,19 +8,24 @@ const CREDITS_SCENE : String = "res://Creditos.tscn"
 @export var button_press_audio : AudioStream
 
 @onready var button_new: Button = $CanvasLayer/Control/ButtonNew
-# Ajustado a Buttoncredits y Buttonend como pusiste en tu último mensaje
 @onready var button_credits: Button = $CanvasLayer/Control/Buttoncredits
 @onready var button_end: Button = $CanvasLayer/Control/Buttonend
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 func _ready() -> void:
-	# Importante: El menú de inicio debe poder procesarse siempre
+	# El menú de inicio debe poder procesarse siempre
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	get_tree().paused = true
-	PlayerManager.player.visible = false
+	
+	if PlayerManager.player:
+		PlayerManager.player.visible = false
+	
 	PlayerHud.visible = false
-	PauseMenu.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# --- CORRECCIÓN CLAVE ---
+	if PlayerManager.pause_menu_instance:
+		PlayerManager.pause_menu_instance.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	if has_node("CanvasLayer/SplashScene"):
 		$CanvasLayer/SplashScene.finished.connect( setup_title_screen )
@@ -50,24 +55,29 @@ func start_game() -> void:
 
 func show_credits() -> void:
 	play_audio( button_press_audio )
-	# Si los créditos son otra escena, despausamos para que se vea la animación
 	get_tree().paused = false
 	get_tree().change_scene_to_file( CREDITS_SCENE )
 
 func quit_game() -> void:
 	play_audio( button_press_audio )
 	print("Saliendo...")
-	# EL TRUCO: 'true' en create_timer permite que funcione aunque el juego esté pausado
+	# 'true' en create_timer permite que funcione aunque esté pausado
 	await get_tree().create_timer(0.2, true, false, true).timeout
 	get_tree().quit()
 
 func exit_title_screen() -> void:
-	PlayerManager.player.visible = true
+	if PlayerManager.player:
+		PlayerManager.player.visible = true
+	
 	PlayerHud.visible = true
-	PauseMenu.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# --- CORRECCIÓN CLAVE ---
+	if PlayerManager.pause_menu_instance:
+		PlayerManager.pause_menu_instance.process_mode = Node.PROCESS_MODE_ALWAYS
+		
 	self.queue_free()
 
 func play_audio( _a : AudioStream ) -> void:
-	if _a:
+	if _a and is_instance_valid(audio_stream_player):
 		audio_stream_player.stream = _a
 		audio_stream_player.play()
