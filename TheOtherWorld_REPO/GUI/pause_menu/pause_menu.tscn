@@ -60,7 +60,8 @@ grow_vertical = 2
 [node name="Button_Quit" type="Button" parent="Control/TabContainer/Pausa/VBoxContainer" unique_id=1269582856]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
-text = "Quit"
+mouse_filter = 1
+text = "Salir del juego"
 
 [node name="Label" type="Label" parent="Control" unique_id=57559670]
 modulate = Color(1, 1, 1, 0.643137)
@@ -77,3 +78,5 @@ offset_bottom = 81.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "ESC para continuar"
+
+[connection signal="pressed" from="Control/TabContainer/Pausa/VBoxContainer/Button_Quit" to="." method="_on_button_quit_pressed"]
