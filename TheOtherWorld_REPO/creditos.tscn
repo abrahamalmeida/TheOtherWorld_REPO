@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b38nwfdaimejn"]
 
 [ext_resource type="Script" uid="uid://rrxry86rmwnp" path="res://creditos.gd" id="1_xau7l"]
-[ext_resource type="AudioStream" uid="uid://chuuudg3u6tfu" path="res://Kate Bush - Running Up That Hill (A Deal With God) (Karaoke Version) (192).mp3" id="2_x6jei"]
+[ext_resource type="AudioStream" uid="uid://8ce8gvx8uk0i" path="res://Kate-Bush-Running-Up-That-Hill-_A-Deal-With-God_-_Karaoke-Version_-_192_.wav" id="2_7flbs"]
 
 [node name="HistoriaInicial" type="CanvasLayer" unique_id=1059665166]
 process_mode = 3
@@ -54,4 +54,4 @@ visible_characters = 0
 visible_ratio = 0.0
 
 [node name="MusicaCreditos" type="AudioStreamPlayer2D" parent="." unique_id=2073685706]
-stream = ExtResource("2_x6jei")
+stream = ExtResource("2_7flbs")

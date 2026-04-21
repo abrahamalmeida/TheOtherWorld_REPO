@@ -33,9 +33,6 @@ func _ready() -> void:
 	
 	personaje_actual = elizabeth_inst
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("cambiar_personaje") and not cambiando:
-		cambiar_personaje()
 
 func cambiar_personaje() -> void:
 	var p_manager = PlayerManager

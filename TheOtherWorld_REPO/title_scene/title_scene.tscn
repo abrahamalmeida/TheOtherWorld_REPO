@@ -127,13 +127,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -61.0
-offset_top = 56.0
-offset_right = 71.0
-offset_bottom = 87.0
+offset_left = -65.0
+offset_top = 92.0
+offset_right = 67.0
+offset_bottom = 123.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "salir"
+text = "Salir del juego
+"
 
 [node name="Buttoncredits" type="Button" parent="CanvasLayer/Control" unique_id=1493614113]
 layout_mode = 1
@@ -142,13 +143,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -62.0
-offset_top = 103.0
-offset_right = 70.0
-offset_bottom = 134.0
+offset_left = -65.0
+offset_top = 55.0
+offset_right = 67.0
+offset_bottom = 86.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "creditos"
+text = "Ver Creditos"
 
 [node name="SplashScene" parent="CanvasLayer" unique_id=855249785 instance=ExtResource("8_hlrge")]
 offset_left = -16.0

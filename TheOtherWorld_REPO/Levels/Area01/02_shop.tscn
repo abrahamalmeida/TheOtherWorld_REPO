@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="5_b5fy1"]
 [ext_resource type="PackedScene" uid="uid://bjfv8081u8dra" path="res://Player/michael.tscn" id="5_ktyg8"]
 [ext_resource type="PackedScene" uid="uid://vlpiuopcomwi" path="res://Levels/level_transition.tscn" id="7_4skut"]
-[ext_resource type="PackedScene" uid="uid://cf0a8hxch6kfd" path="res://Props/pot/pot.tscn" id="23_386ky"]
 
 [node name="02" type="Node2D" unique_id=1609500297]
 y_sort_enabled = true
@@ -28,7 +27,7 @@ tile_map_data = PackedByteArray("AAAEAP//AQALAAEAAAAFAP//AQALAAEAAAAHAP//AQALAAE
 update_bounds = false
 
 [node name="ShopTilemapLayer6" parent="." unique_id=873765259 instance=ExtResource("4_5ajat")]
-tile_map_data = PackedByteArray("AAAEAP7/AgABAAMAAAAIAP7/AgABAAMAAAAHAP7/AgADAAMAAAAGAAUAAgAEAAMAAAAGAAYAAgAEAAQAAAAEAAUAAQAPAAgAAAAFAP7/AgADAAMAAAAJAAMAAgADAAMAAAADAAUAAgAPAAgAAAA=")
+tile_map_data = PackedByteArray("AAAEAP7/AgABAAMAAAAIAP7/AgABAAMAAAAHAP7/AgADAAMAAAAFAP7/AgADAAMAAAAJAAMAAgADAAMAAAACAAUAAgAEAAMAAAACAAYAAgAEAAQAAAADAAYAAgAPAAgAAAA=")
 update_bounds = false
 
 [node name="PlayerSpawn" parent="." unique_id=991243731 instance=ExtResource("5_b5fy1")]
@@ -37,9 +36,6 @@ michael_scene = ExtResource("5_ktyg8")
 
 [node name="Pots" type="Node2D" parent="." unique_id=1259621925]
 y_sort_enabled = true
-
-[node name="Pot9" parent="Pots" unique_id=567328417 instance=ExtResource("23_386ky")]
-position = Vector2(80, 216)
 
 [node name="LevelTransition" parent="." unique_id=1349561924 instance=ExtResource("7_4skut")]
 position = Vector2(288, 240)
