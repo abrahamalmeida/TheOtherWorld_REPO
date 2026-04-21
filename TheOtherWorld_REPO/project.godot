@@ -23,17 +23,18 @@ config/icon="uid://brcd573x2ck26"
 
 [autoload]
 
-PauseMenu="*res://GUI/pause_menu/pause_menu.tscn"
-PlayerHud="*res://GUI/player_hud/player_hud.tscn"
 AudioManager="*res://00_Globals/global_audio_manager.gd"
 LevelManager="*res://00_Globals/global_level_manager.gd"
+PlayerHud="*res://GUI/player_hud/player_hud.tscn"
 PlayerManager="*res://00_Globals/global_player_manager.gd"
 SceneTransition="*res://GUI/scene_transition/scene_transition.tscn"
 SaveManager="*res://00_Globals/global_save_manager.gd"
+PauseMenu="*res://GUI/pause_menu/pause_menu.tscn"
 DialogSystem="*res://GUI/dialog_system/dialog_system.tscn"
 QuestManager="*res://quests/scripts/global_quest_manager.gd"
 EffectManager="*res://00_Globals/global_effect_manager.gd"
 ShopMenu="*res://GUI/shop_menu/shop_menu.tscn"
+Pausa="*uid://blghhc081ewxp"
 
 [display]
 
@@ -145,6 +146,11 @@ switch_ability={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":9,"pressure":0.0,"pressed":true,"script":null)
+]
+}
+cambiar_personaje={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":72,"key_label":0,"unicode":104,"location":0,"echo":false,"script":null)
 ]
 }
 

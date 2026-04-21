@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b38nwfdaimejn"]
+[gd_scene format=3 uid="uid://3bkyjlobpjaq"]
 
 [ext_resource type="Script" uid="uid://rrxry86rmwnp" path="res://creditos.gd" id="1_xau7l"]
 [ext_resource type="AudioStream" uid="uid://8ce8gvx8uk0i" path="res://Kate-Bush-Running-Up-That-Hill-_A-Deal-With-God_-_Karaoke-Version_-_192_.wav" id="2_7flbs"]
