@@ -1,12 +1,10 @@
 [gd_resource type="Resource" script_class="NPCResource" format=3 uid="uid://csvi3x1wp3gy6"]
 
 [ext_resource type="Script" uid="uid://vdkoe1ao4p7n" path="res://npc/scripts/npc_resource.gd" id="1_pd3hp"]
-[ext_resource type="Texture2D" uid="uid://cbjnt02b5xojv" path="res://npc/sprites/portraits/npc_portrait_01.png" id="1_y8f7e"]
-[ext_resource type="Texture2D" uid="uid://2701oi0fk3t0" path="res://npc/sprites/npc_sprite.png" id="3_epnud"]
+[ext_resource type="Texture2D" uid="uid://cvyc8xiyd1w1e" path="res://Sotano/police.png" id="2_4pyck"]
 
 [resource]
 script = ExtResource("1_pd3hp")
-npc_name = "Jacob"
-sprite = ExtResource("3_epnud")
-portrait = ExtResource("1_y8f7e")
+npc_name = "Oficial Tomas"
+sprite = ExtResource("2_4pyck")
 dialog_audio_pitch = 0.5

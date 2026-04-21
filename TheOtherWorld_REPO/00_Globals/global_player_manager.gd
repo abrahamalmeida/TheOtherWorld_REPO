@@ -156,3 +156,18 @@ func reward_xp(amount: int) -> void:
 
 func shake_camera(trauma: float = 1) -> void:
 	camera_shook.emit(clamp(trauma, 0, 3))
+	
+func play_audio( _audio_stream : AudioStream ) -> void:
+	if _audio_stream == null:
+		return
+		
+	# Creamos un reproductor de audio temporal
+	var _audio_player : AudioStreamPlayer = AudioStreamPlayer.new()
+	_audio_player.stream = _audio_stream
+	_audio_player.bus = "Sound" # Asegúrate de tener un bus llamado "Sound" o usa "Master"
+	
+	add_child( _audio_player )
+	_audio_player.play()
+	
+	# Lo borramos automáticamente cuando termine de sonar
+	_audio_player.finished.connect( _audio_player.queue_free )
