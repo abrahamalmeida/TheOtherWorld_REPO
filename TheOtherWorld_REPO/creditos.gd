@@ -1,116 +1,93 @@
 extends CanvasLayer
 
 @onready var label: RichTextLabel = $ColorRect/RichTextLabel
-@onready var color_rect = $ColorRect
+@onready var color_rect: ColorRect = $ColorRect
 
-# --- AJUSTES CINEMÁTICOS ---
-@export var velocidad_escritura : float = 0.08  # Más alto = más lento
-@export var pausa_inicial : float = 2.0
-@export var margen_final_pixeles : float = 100.0 # Espacio que queda abajo al terminar
+# --- AJUSTES DE LOS CRÉDITOS ---
+@export var velocidad_subida : float = 35.0  # Píxeles por segundo (suave)
+@export var pausa_final : float = 4.0        # Tiempo que se queda el texto al final
+@export var margen_seguridad : float = 50.0  # Para que no pegue al borde superior
 
-var intro_tween : Tween 
+var creditos_tween : Tween 
 
 func _ready() -> void:
 	# Aseguramos que el juego no esté pausado
 	get_tree().paused = false 
 	
 	if not is_instance_valid(label):
-		print("Error: No se encontró el RichTextLabel")
+		print("Error: No se encontró el RichTextLabel en los créditos")
 		return
-		
-	# Preparación inicial del texto
-	label.visible_ratio = 0
-	# Empezamos el texto en la mitad inferior para que tenga espacio de subir
-	label.position.y = get_viewport().get_visible_rect().size.y * 0.7
 	
-	ejecutar_introduccion()
-
-func ejecutar_introduccion() -> void:
-	var texto_completo = label.text
-	var total_caracteres = texto_completo.length()
-	
-	# Buscamos la primera pausa (el primer salto de línea)
-	var punto_partida = texto_completo.find("\n") + 1
-	if punto_partida <= 0: punto_partida = 10
-	var ratio_fecha = float(punto_partida) / total_caracteres
-	
-	if intro_tween: intro_tween.kill()
-	intro_tween = create_tween()
-	intro_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS) 
-	
-	# --- PASO 1: ESCRIBIR LA FECHA ---
-	intro_tween.tween_property(label, "visible_ratio", ratio_fecha, punto_partida * velocidad_escritura)
-	intro_tween.tween_interval(pausa_inicial)
-	
-	# --- PASO 2: ESCRIBIR EL CUERPO Y SUBIR SIN PASARSE ---
-	var caracteres_restantes = total_caracteres - punto_partida
-	var duracion_final = caracteres_restantes * velocidad_escritura
-	
-	# CÁLCULO DEL LÍMITE (Evita el bloque vacío)
-	# Queremos que la última línea del texto se detenga antes de salir de la pantalla
+	# Configuración inicial: El texto empieza justo debajo de la pantalla
 	var alto_pantalla = get_viewport().get_visible_rect().size.y
-	var altura_real_texto = label.get_content_height()
+	label.position.y = alto_pantalla
+	label.visible_ratio = 1.0 # En créditos el texto suele estar ya escrito
 	
-	# El destino es: que el final del texto quede a "margen_final_pixeles" del borde inferior
-	var destino_y = alto_pantalla - altura_real_texto - margen_final_pixeles
+	# Iniciamos la música si tienes el nodo (opcional)
+	if has_node("AudioStreamPlayer"): $MusicaCreditos.play()
 	
-	# Si el texto es corto y el destino es más abajo de donde ya estamos, forzamos un movimiento leve
-	if destino_y > label.position.y:
-		destino_y = label.position.y - 150
+	ejecutar_creditos()
 
-	# Ejecución en paralelo
-	intro_tween.tween_property(label, "visible_ratio", 1.0, duracion_final)
-	intro_tween.parallel().tween_property(
+func ejecutar_creditos() -> void:
+	var alto_pantalla = get_viewport().get_visible_rect().size.y
+	var altura_texto = label.get_content_height()
+	
+	# El destino es que el final del texto quede centrado o un poco arriba
+	var destino_y = (alto_pantalla / 2) - (altura_texto / 2)
+	
+	# Si el texto es muy largo (muchos nombres), que suba hasta dejar ver el final
+	if altura_texto > alto_pantalla:
+		destino_y = margen_seguridad - (altura_texto - alto_pantalla / 2)
+	
+	# Calculamos la duración basada en la distancia para que la velocidad sea constante
+	var distancia = abs(label.position.y - destino_y)
+	var duracion = distancia / velocidad_subida
+	
+	if creditos_tween: creditos_tween.kill()
+	creditos_tween = create_tween()
+	creditos_tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	
+	# Animación de subida lineal (estilo cine)
+	creditos_tween.tween_property(
 		label, 
 		"position:y", 
 		destino_y, 
-		duracion_final
+		duracion
 	).set_trans(Tween.TRANS_LINEAR)
 	
-	# Al terminar, esperamos y cargamos el nivel
-	intro_tween.finished.connect(func(): 
-		await get_tree().create_timer(3.0).timeout
-		saltar_a_nivel()
+	# Al terminar, esperamos y volvemos al inicio
+	creditos_tween.finished.connect(func():
+		await get_tree().create_timer(pausa_final).timeout
+		ir_al_inicio()
 	)
 
 func _process(_delta: float) -> void:
-	# Sistema de aceleración manual (Select/Espacio)
-	if intro_tween and intro_tween.is_running():
-		if Input.is_action_pressed("ui_select"): 
-			intro_tween.set_speed_scale(3.0) 
+	# Acelerar créditos si dejan presionado Espacio/Select
+	if creditos_tween and creditos_tween.is_running():
+		if Input.is_action_pressed("ui_select"):
+			creditos_tween.set_speed_scale(4.0)
 		else:
-			intro_tween.set_speed_scale(1.0) 
+			creditos_tween.set_speed_scale(1.0)
 
 func _input(event: InputEvent) -> void:
+	# Si presionan Enter/Aceptar, saltamos al inicio de una vez
 	if event.is_action_pressed("ui_accept"):
-		if label.visible_ratio < 0.95:
-			# Saltar animación
-			if intro_tween: intro_tween.kill()
-			label.visible_ratio = 1.0
-			# Ajuste manual rápido de posición para que se vea el final
-			label.position.y -= 100 
-			print("Intro saltada.")
-		else:
-			saltar_a_nivel()
+		ir_al_inicio()
 
-func saltar_a_nivel() -> void:
-	# Bloqueamos el input para evitar doble ejecución
-	set_process_input(false)
+func ir_al_inicio() -> void:
+	set_process_input(false) # Evitar doble llamada
 	
-	print("Cambiando al nivel de la tienda...")
+	if creditos_tween:
+		creditos_tween.kill()
+		
+	print("Regresando a la pantalla de título...")
 	
-	# Mostramos el HUD
+	# Ocultamos el HUD por si acaso
 	if is_instance_valid(PlayerHud):
-		PlayerHud.show()
-		# Actualización segura de HP
-		if PlayerManager.player:
-			PlayerHud.update_hp(PlayerManager.player.hp, PlayerManager.player.max_hp)
-
-	# Reset de estado del jugador (evita que se mueva en la carga)
-	PlayerManager.force_player_reset()
-	
-	# Cambio de nivel diferido para que la Victus no sufra
+		PlayerHud.hide()
+		
+	# Usamos el LevelManager para volver al menú principal de forma limpia
+	# Cambia la ruta si tu escena de inicio se llama distinto
 	LevelManager.load_new_level("res://title_scene/title_scene.tscn", "", Vector2.ZERO)
 	
-	# Eliminamos la intro de la memoria
 	queue_free()

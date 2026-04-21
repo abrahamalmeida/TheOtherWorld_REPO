@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://chuuudg3u6tfu"
+path="res://.godot/imported/Kate Bush - Running Up That Hill (A Deal With God) (Karaoke Version) (192).mp3-55e1dedbffd8485d07f75895c661348c.mp3str"
+
+[deps]
+
+source_file="res://Kate Bush - Running Up That Hill (A Deal With God) (Karaoke Version) (192).mp3"
+dest_files=["res://.godot/imported/Kate Bush - Running Up That Hill (A Deal With God) (Karaoke Version) (192).mp3-55e1dedbffd8485d07f75895c661348c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

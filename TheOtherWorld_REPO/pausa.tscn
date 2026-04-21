@@ -30,6 +30,5 @@ text = "continuar"
 layout_mode = 2
 text = "Salir"
 
-[connection signal="pre_sort_children" from="ColorRect/CenterContainer/VBoxContainer" to="." method="_on_v_box_container_pre_sort_children"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/ResumeBtn" to="." method="_on_resume_btn_pressed"]
 [connection signal="pressed" from="ColorRect/CenterContainer/VBoxContainer/QuitBtn" to="." method="_on_quit_btn_pressed"]

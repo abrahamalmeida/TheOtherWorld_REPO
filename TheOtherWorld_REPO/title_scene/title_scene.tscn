@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cwcuweyvlm82w" path="res://fondo1.png" id="7_fkwea"]
 [ext_resource type="Texture2D" uid="uid://cnlmpfravkl1v" path="res://title_scene/sprites/title.png" id="7_lj5tl"]
 [ext_resource type="PackedScene" uid="uid://dhr1wkvl1431s" path="res://title_scene/splash_scene.tscn" id="8_hlrge"]
+[ext_resource type="AudioStream" uid="uid://chuuudg3u6tfu" path="res://Kate Bush - Running Up That Hill (A Deal With God) (Karaoke Version) (192).mp3" id="11_svbj5"]
 
 [sub_resource type="Animation" id="Animation_dt7ym"]
 length = 0.001
@@ -117,7 +118,7 @@ offset_right = 68.0
 offset_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Juegar"
+text = "Jugar"
 
 [node name="Buttonend" type="Button" parent="CanvasLayer/Control" unique_id=1830955117]
 layout_mode = 1
@@ -150,7 +151,6 @@ grow_vertical = 2
 text = "creditos"
 
 [node name="SplashScene" parent="CanvasLayer" unique_id=855249785 instance=ExtResource("8_hlrge")]
-visible = false
 offset_left = -16.0
 offset_top = -21.0
 offset_right = 17.0
@@ -160,4 +160,5 @@ offset_bottom = 21.0
 position = Vector2(240, 139)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1724279233]
+stream = ExtResource("11_svbj5")
 max_polyphony = 4
