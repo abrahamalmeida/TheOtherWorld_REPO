@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dr4blo7ya448q" path="res://Levels/player_spawn.tscn" id="4_loexg"]
 [ext_resource type="Texture2D" uid="uid://d01qv0qqg01ba" path="res://Tile Maps/Sprites/Grass-01.png" id="4_t6rks"]
 [ext_resource type="Resource" uid="uid://cvnr3a38pmudn" path="res://quests/recover_lost_flute.tres" id="5_7m18i"]
-[ext_resource type="PackedScene" uid="uid://bxnynmne8hsl2" path="res://Enemies/goblin/goblin.tscn" id="5_xqwo5"]
 [ext_resource type="Texture2D" uid="uid://fwby631k8pda" path="res://Tile Maps/Sprites/dungeon_entrance.png" id="5_xv5ie"]
 [ext_resource type="AudioStream" uid="uid://io7jxqk648xa" path="res://Levels/music/example_music_01.ogg" id="6_7wr3y"]
 [ext_resource type="PackedScene" uid="uid://bjfv8081u8dra" path="res://Player/michael.tscn" id="9_c2gse"]
+[ext_resource type="PackedScene" uid="uid://diys5ob8jp22a" path="res://goblin_policia.tscn" id="10_an23e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n2ps0"]
 texture = ExtResource("4_t6rks")
@@ -533,6 +533,12 @@ rendering_quadrant_size = 32
 position = Vector2(254, 197)
 michael_scene = ExtResource("9_c2gse")
 
+[node name="Goblin" parent="." unique_id=1071589499 instance=ExtResource("10_an23e")]
+position = Vector2(388, 94)
+
+[node name="Goblin2" parent="." unique_id=1252900053 instance=ExtResource("10_an23e")]
+position = Vector2(179, 96)
+
 [node name="LevelTransition" parent="." unique_id=1182149399 instance=ExtResource("4_b5wk2")]
 position = Vector2(256, 320)
 level = "res://Levels/Area01/02.tscn"
@@ -550,13 +556,3 @@ level = "res://Levels/Dungeon01/01.tscn"
 center_player = true
 size = 3
 side = 2
-
-[node name="Goblin" parent="." unique_id=213171362 instance=ExtResource("5_xqwo5")]
-position = Vector2(60, 263)
-hp = 1
-xp_reward = null
-
-[node name="Goblin2" parent="." unique_id=2077097739 instance=ExtResource("5_xqwo5")]
-position = Vector2(393, 111)
-hp = 1
-xp_reward = 50
