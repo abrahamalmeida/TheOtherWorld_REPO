@@ -57,7 +57,7 @@ size = 1
 side = 2
 
 [node name="NPC" parent="." unique_id=1258697946 instance=ExtResource("7_62xuh")]
-position = Vector2(62.0707, 143.942)
+position = Vector2(62.0707, 190.61128)
 npc_resource = ExtResource("8_fbvcf")
 
 [node name="NpcBehaviorWander" parent="NPC" unique_id=369857762 instance=ExtResource("8_f8c10")]
