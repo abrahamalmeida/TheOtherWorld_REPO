@@ -170,3 +170,16 @@ func play_audio( _audio_stream : AudioStream ) -> void:
 	
 	# Lo borramos automáticamente cuando termine de sonar
 	_audio_player.finished.connect( _audio_player.queue_free )
+
+func reset_to_default_player() -> void:
+	var elizabeth = get_tree().get_first_node_in_group("elizabeth_group") # O como la identifiques
+	if elizabeth:
+		player = elizabeth
+		elizabeth.visible = true
+		elizabeth.process_mode = Node.PROCESS_MODE_INHERIT
+		
+		# Ocultar a Michael si existe
+		var michael = get_tree().get_first_node_in_group("michael_group")
+		if michael:
+			michael.visible = false
+			michael.process_mode = Node.PROCESS_MODE_DISABLED

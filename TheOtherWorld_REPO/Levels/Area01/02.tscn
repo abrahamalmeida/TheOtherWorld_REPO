@@ -19,10 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://b523kljtfiar7" path="res://quests/utility_nodes/quest_advance_trigger.tscn" id="20_mgke4"]
 [ext_resource type="Script" uid="uid://cj17f33sisctc" path="res://quests/utility_nodes/quest_activated_switch.gd" id="21_dorfn"]
 [ext_resource type="PackedScene" uid="uid://cwby8egx8vwx2" path="res://quests/utility_nodes/quest_activated_switch.tscn" id="23_vtf5b"]
-[ext_resource type="Resource" uid="uid://dylmk5rhkvo1d" path="res://Items/ability_boomerang.tres" id="26_s3up8"]
 [ext_resource type="PackedScene" uid="uid://cpohuml8sje4u" path="res://Items/item_pickup/item_pickup.tscn" id="27_s3up8"]
-[ext_resource type="PackedScene" uid="uid://cldjbf03xmdqt" path="res://Interactables/TreasureChest/treasure-chest.tscn" id="27_w21e7"]
-[ext_resource type="Resource" uid="uid://ommu74ikveqs" path="res://Items/ability_arrow.tres" id="28_fw76p"]
 [ext_resource type="Resource" uid="uid://bdcndrurok2ci" path="res://Items/arrow.tres" id="29_vv7nh"]
 [ext_resource type="PackedScene" uid="uid://b0q1f74icbihy" path="res://Interactables/grapple_post/grapple_post.tscn" id="31_s3up8"]
 
@@ -91,7 +88,7 @@ Checking if player has quest"
 
 [node name="DialogText" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction" unique_id=2029425667]
 script = ExtResource("11_ufet7")
-text = "Elizabeth, he notado movimientos raros en el laboratorio"
+text = "Elizabeth, he notado movimientos raros en la zona.."
 npc_info = ExtResource("8_yuemd")
 
 [node name="DialogChoice" type="Node" parent="NPC_NERO/QuestActivatedSwitch/DialogInteraction" unique_id=155230771]
@@ -184,16 +181,8 @@ script = ExtResource("11_ufet7")
 text = "Que pasa..?"
 npc_info = ExtResource("8_yuemd")
 
-[node name="Treasure-chest2" parent="." unique_id=1379046853 instance=ExtResource("27_w21e7")]
-position = Vector2(-12, 199)
-item_data = ExtResource("26_s3up8")
-
-[node name="Treasure-chest4" parent="." unique_id=861106687 instance=ExtResource("27_w21e7")]
-position = Vector2(23, 199)
-item_data = ExtResource("28_fw76p")
-
 [node name="ItemPickup3" parent="." unique_id=462936653 instance=ExtResource("27_s3up8")]
-position = Vector2(23, 226)
+position = Vector2(115, 65)
 item_data = ExtResource("29_vv7nh")
 item_count = 10
 

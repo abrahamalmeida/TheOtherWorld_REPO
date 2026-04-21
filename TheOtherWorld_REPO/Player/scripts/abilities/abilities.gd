@@ -5,7 +5,7 @@ const BOOMERANG = preload("res://Player/boomerang.tscn")
 const STONE_PROJECTILE = preload("res://Interactables/arrow/arrow.tscn") 
 
 var abilities : Array[ String ] = [
-	"", "", "", "" 
+	"BOOMERANG", "", "SLINGSHOT", "" 
 ]
 
 var selected_ability : int = 0

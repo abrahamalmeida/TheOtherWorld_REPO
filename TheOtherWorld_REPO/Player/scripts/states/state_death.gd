@@ -39,3 +39,13 @@ func physics( _delta : float ) -> State:
 ## What happens with input events in this State?
 func handle_input( _event: InputEvent ) -> State:
 	return null
+
+func _on_boton_menu_principal_pressed() -> void:
+	# 1. Resetear el Manager para que no busque fantasmas de Michael
+	PlayerManager.player = null
+	
+	# 2. Despausar (por si acaso el Game Over pausó el engine)
+	get_tree().paused = false
+	
+	# 3. Volver al Título
+	get_tree().change_scene_to_file("res://title_scene/title_scene.tscn")
