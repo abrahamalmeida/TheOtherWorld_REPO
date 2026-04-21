@@ -50,7 +50,8 @@ func viaje_unico_a_michael() -> void:
 	if ya_viajamos: return
 	ya_viajamos = true
 	_check_and_instantiate_players()
-	if is_instance_valid(elizabeth): _desactivar_personaje(elizabeth)
+	if is_instance_valid(elizabeth): 
+		_desactivar_personaje(elizabeth)
 	
 	var path_escena : String = "res://Levels/Dungeon01/02.tscn"
 	if is_instance_valid(LevelManager):
@@ -58,7 +59,7 @@ func viaje_unico_a_michael() -> void:
 	else:
 		get_tree().change_scene_to_file(path_escena)
 
-# --- 7. SISTEMA DE XP (EL QUE FALTABA) ---
+# --- 7. SISTEMA DE XP ---
 func reward_xp(amount: int) -> void:
 	current_xp += amount
 	if current_level < level_requirements.size():
@@ -69,14 +70,26 @@ func reward_xp(amount: int) -> void:
 
 # --- 8. FUNCIONES DE RESET Y CÁMARA ---
 func force_player_reset() -> void:
-	var p = player
+	# RESET CRUCIAL: Volver a Elizabeth si mueres
+	ya_viajamos = false 
+	
+	_check_and_instantiate_players()
+	
+	# Desactivamos a Michael por si acaso seguía visible
+	if is_instance_valid(michael):
+		_desactivar_personaje(michael)
+		
+	var p = player # Esto ahora devolverá a Elizabeth
 	if is_instance_valid(p):
 		p.visible = true
 		p.process_mode = Node.PROCESS_MODE_INHERIT
 		if p.has_method("revive_player"): p.revive_player()
 		if "hp" in p:
 			p.hp = p.max_hp
-			if is_instance_valid(PlayerHud): PlayerHud.update_hp(p.hp, p.max_hp)
+			if is_instance_valid(PlayerHud): 
+				PlayerHud.update_hp(p.hp, p.max_hp)
+	
+	print("Jugador reseteado: Volviendo a Elizabeth")
 
 func reset_camera_on_player() -> void:
 	var p = player
@@ -96,17 +109,15 @@ func _unhandled_input(event: InputEvent) -> void:
 func toggle_pause() -> void:
 	if not is_instance_valid(pause_menu_instance): return
 	if not get_tree().paused:
+		get_tree().paused = true
+		pause_menu_instance.visible = true
 		if pause_menu_instance.has_method("show_pause_menu"):
 			pause_menu_instance.show_pause_menu()
-		else:
-			get_tree().paused = true
-			pause_menu_instance.visible = true
 	else:
+		get_tree().paused = false
+		pause_menu_instance.visible = false
 		if pause_menu_instance.has_method("hide_pause_menu"):
 			pause_menu_instance.hide_pause_menu()
-		else:
-			get_tree().paused = false
-			pause_menu_instance.visible = false
 
 # --- 10. GESTIÓN DE PERSONAJES Y JERARQUÍA ---
 func set_player_position(_new_pos: Vector2) -> void:
@@ -149,24 +160,19 @@ func unparent_player(_p: Node2D) -> void:
 	if is_instance_valid(player) and player.get_parent() == _p:
 		_p.remove_child(player)
 
+# --- 11. AUDIO Y UTILIDADES ---
 func interact():
 	if player != null and player.has_method("player_interact"): player.player_interact()
 	else: interact_pressed.emit()
 
 func shake_camera(trauma: float = 1) -> void:
 	camera_shook.emit(clamp(trauma, 0, 3))
-	
+
 func play_audio( _audio_stream : AudioStream ) -> void:
-	if _audio_stream == null:
-		return
-		
-	# Creamos un reproductor de audio temporal
+	if _audio_stream == null: return
 	var _audio_player : AudioStreamPlayer = AudioStreamPlayer.new()
 	_audio_player.stream = _audio_stream
-	_audio_player.bus = "Sound" # Asegúrate de tener un bus llamado "Sound" o usa "Master"
-	
+	_audio_player.bus = "Sound"
 	add_child( _audio_player )
 	_audio_player.play()
-	
-	# Lo borramos automáticamente cuando termine de sonar
 	_audio_player.finished.connect( _audio_player.queue_free )
